@@ -22,7 +22,23 @@ Africa’s premier executive forum on governance, risk, compliance, cybersecurit
 - Lucide Icons
 
 ## Setup
-Simply open `index.html` in your browser to view the landing page.
+
+First, install dependencies:
+```bash
+npm install
+```
+
+Then, run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Development
+
+You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
 
 ---
 *Created by Orion — The Sovereign Architect.*
