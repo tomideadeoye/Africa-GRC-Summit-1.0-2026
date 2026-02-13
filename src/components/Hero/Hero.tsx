@@ -70,13 +70,13 @@ export default function Hero() {
               <span className="text-[10px] uppercase text-slate-400 tracking-[3px] mb-1">Location</span>
               <strong className="text-white tracking-wider text-sm flex items-center">
                 <svg className="w-4 h-4 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
-                LE MERIDIEN, LAGOS
+                CIVIC CENTRE, VICTORIA ISLAND, LAGOS
               </strong>
             </div>
 
             <div className="flex flex-col">
               <span className="text-[10px] uppercase text-slate-400 tracking-[3px] mb-1">Schedule</span>
-              <strong className="text-white tracking-wider text-sm">MARCH 25-27, 2026</strong>
+              <strong className="text-white tracking-wider text-sm">OCTOBER 2026</strong>
             </div>
           </div>
         </div>

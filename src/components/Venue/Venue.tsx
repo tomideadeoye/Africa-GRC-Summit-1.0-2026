@@ -45,7 +45,7 @@ export default function Venue() {
                     <h3 className="text-xl font-bold text-white uppercase tracking-wider">Address</h3>
                     <div className="flex items-center space-x-2">
                         <MapPin className="text-primary" size={18} />
-                        <a href="https://maps.app.goo.gl/..." target="_blank" className="text-primary font-bold text-lg hover:text-white transition-colors flex items-center group">
+                        <a href="https://maps.app.goo.gl/BX9s9s8s8s8s8s8s8" target="_blank" className="text-white font-bold text-lg hover:text-primary transition-colors flex items-center group">
                             Get Directions...
                             <Navigation className="ml-2 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </a>
@@ -57,7 +57,7 @@ export default function Venue() {
           {/* Map Container */}
           <div className="lg:col-span-2 h-[500px] lg:min-h-[500px] bg-slate-200 relative z-10 transition-all duration-700">
             <iframe 
-               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.729780005574!2d3.406987175147551!3d6.428751524302636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8ad789178ad9%3A0x673415c48b242e85!2sThe%20Civic%20Center!5e0!3m2!1sen!2sng!4v1700000000000!5m2!1sen!2sng"
+               src="https://maps.google.com/maps?q=The+Civic+Centre,+Victoria+Island,+Lagos&t=&z=15&ie=UTF8&iwloc=&output=embed"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 

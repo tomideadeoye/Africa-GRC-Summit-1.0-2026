@@ -33,8 +33,8 @@ export default function Footer() {
             <h3 className="text-foreground dark:text-white font-bold mb-6 text-sm uppercase tracking-widest">Quick Links</h3>
             <ul className="space-y-4">
               <li><a href="#about" className="text-muted-foreground dark:text-slate-400 hover:text-primary transition-colors">About Summit</a></li>
-              <li><a href="#programme" className="text-muted-foreground dark:text-slate-400 hover:text-primary transition-colors">Programme</a></li>
-              <li><a href="#speakers" className="text-muted-foreground dark:text-slate-400 hover:text-primary transition-colors">Speakers</a></li>
+              <li><a href="#audience" className="text-muted-foreground dark:text-slate-400 hover:text-primary transition-colors">Who Should Attend</a></li>
+              <li><a href="#partners" className="text-muted-foreground dark:text-slate-400 hover:text-primary transition-colors">Partners</a></li>
               <li><a href="#venue" className="text-muted-foreground dark:text-slate-400 hover:text-primary transition-colors">Venue</a></li>
             </ul>
           </div>

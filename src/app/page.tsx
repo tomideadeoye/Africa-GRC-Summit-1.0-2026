@@ -1,10 +1,10 @@
 import Hero from "@/components/Hero/Hero";
 import About from "@/components/About/About";
 import Audience from "@/components/Audience/Audience";
-import Speakers from "@/components/Speakers/Speakers";
-import Venue from "@/components/Venue/Venue";
-import Programme from "@/components/Programme/Programme";
+// import Speakers from "@/components/Speakers/Speakers"; // Hidden until real speaker data is confirmed
+// import Programme from "@/components/Programme/Programme"; // Hidden until real agenda is confirmed
 import Partners from "@/components/Partners/Partners";
+import Venue from "@/components/Venue/Venue";
 import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
@@ -13,8 +13,7 @@ export default function Home() {
       <Hero />
       <About />
       <Audience />
-      <Speakers />
-      <Programme />
+      {/* Speakers and Programme sections hidden until confirmed data is provided */}
       <Partners />
       <Venue />
       <Footer />
