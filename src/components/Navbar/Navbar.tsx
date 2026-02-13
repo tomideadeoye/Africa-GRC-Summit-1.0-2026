@@ -28,7 +28,7 @@ export default function Navbar() {
             </a>
           ))}
           <a 
-            href="#register"
+            href="/register"
             className="font-bold text-sm px-6 py-2 rounded-lg shadow-lg hover:shadow-[0_6px_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 transition-all uppercase tracking-wide"
             style={{ backgroundColor: '#d4af37', color: '#ffffff' }}
           >
@@ -64,7 +64,7 @@ export default function Navbar() {
             ))}
             <div className="flex items-center justify-end pt-4">
               <a 
-                href="#register"
+                href="/register"
                 className="font-bold text-sm px-6 py-2 rounded-lg shadow-lg uppercase tracking-wide"
                 onClick={() => setMobileOpen(false)}
                 style={{ backgroundColor: '#d4af37', color: '#ffffff' }}

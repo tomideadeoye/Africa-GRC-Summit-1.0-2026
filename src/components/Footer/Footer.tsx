@@ -49,7 +49,7 @@ export default function Footer() {
                 </li>
              </ul>
              
-             <a href="#register" className="inline-flex items-center text-primary font-bold hover:text-foreground dark:hover:text-white transition-colors group">
+             <a href="/register" className="inline-flex items-center text-primary font-bold hover:text-foreground dark:hover:text-white transition-colors group">
                 Register Interest <ArrowUpRight size={16} className="ml-1 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
              </a>
           </div>

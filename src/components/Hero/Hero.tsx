@@ -49,7 +49,7 @@ export default function Hero() {
           
           <div className="flex flex-col sm:flex-row gap-5 mb-16">
             <a 
-              href="#register"
+              href="/register"
               className="glow-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold uppercase tracking-wider rounded-lg"
               style={{ color: '#ffffff' }}
             >
