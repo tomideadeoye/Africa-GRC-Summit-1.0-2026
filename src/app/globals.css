@@ -111,7 +111,7 @@
 
 .glow-btn {
   background: linear-gradient(135deg, #d4af37, #b4941f);
-  color: #0f172a;
+  color: #ffffff !important;
   border: none;
   border-radius: 8px;
   font-weight: 700;

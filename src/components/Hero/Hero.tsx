@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-black">
@@ -28,55 +26,66 @@ export default function Hero() {
       <div className="container px-6 mx-auto relative z-20">
         <div className="max-w-[1000px] animate-fade-in-up">
           <div className="inline-flex items-center space-x-4 mb-8">
-            <span className="px-4 py-1.5 bg-primary text-primary-foreground text-xs font-black uppercase tracking-[3px] rounded-sm shadow-xl">
+            <span 
+              className="px-4 py-1.5 text-xs font-black uppercase tracking-[3px] rounded-sm shadow-xl"
+              style={{ background: 'linear-gradient(135deg, #d4af37, #b4941f)', color: '#ffffff' }}
+            >
               1st Annual
             </span>
-            <span className="text-white/80 text-sm font-medium tracking-[2px] uppercase">
+            <span className="text-sm font-medium tracking-[2px] uppercase" style={{ color: 'rgba(255,255,255,0.8)' }}>
               #AfricaGRCSummit
             </span>
           </div>
           
-          <h1 className="text-5xl md:text-8xl font-black leading-[1] mb-8 tracking-tight text-white">
+          <h1 className="text-5xl md:text-8xl font-black leading-[1] mb-8 tracking-tight" style={{ color: '#ffffff' }}>
             AFRICA <span className="text-gradient">GRC</span> <br />
             SUMMIT 2026
           </h1>
           
-          <p className="text-xl md:text-2xl text-slate-200 leading-relaxed mb-12 max-w-[750px] font-medium drop-shadow-lg">
-            Join the continent's most influential GRC leaders to architect the future of 
+          <p className="text-xl md:text-2xl leading-relaxed mb-12 max-w-[750px] font-medium drop-shadow-lg" style={{ color: '#cbd5e1' }}>
+            Join the continent&apos;s most influential GRC leaders to architect the future of 
             governance, performance, risk, and compliance in the digital age.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-5 mb-16">
-            <Button className="glow-btn px-10 py-7 text-lg h-auto">
+            <a 
+              href="#register"
+              className="glow-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold uppercase tracking-wider rounded-lg"
+              style={{ color: '#ffffff' }}
+            >
               Register Your Interest
-            </Button>
-            <Button variant="outline" className="bg-white/5 border-white/20 text-white backdrop-blur-md px-10 py-7 text-lg hover:bg-white/10 hover:border-white/40 h-auto transition-all uppercase font-bold tracking-wider">
+            </a>
+            <a 
+              href="#"
+              className="inline-flex items-center justify-center px-10 py-4 text-lg font-bold uppercase tracking-wider rounded-lg backdrop-blur-md hover:bg-white/10 transition-all"
+              style={{ color: '#ffffff', border: '2px solid rgba(255,255,255,0.3)' }}
+            >
               Download Prospectus
-            </Button>
+            </a>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
-                 <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(212,175,55,1)] animate-pulse"></div>
+              <div className="w-12 h-12 rounded-full bg-[#d4af37]/20 flex items-center justify-center border border-[#d4af37]/30">
+                 <div className="w-2 h-2 rounded-full bg-[#d4af37] shadow-[0_0_10px_rgba(212,175,55,1)] animate-pulse"></div>
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] uppercase text-slate-400 tracking-[3px] mb-1">Status</span>
-                <strong className="text-white tracking-wider text-sm">ENROLLMENT OPEN</strong>
+                <span className="text-[10px] uppercase tracking-[3px] mb-1" style={{ color: '#94a3b8' }}>Status</span>
+                <strong className="tracking-wider text-sm" style={{ color: '#ffffff' }}>ENROLLMENT OPEN</strong>
               </div>
             </div>
             
             <div className="flex flex-col">
-              <span className="text-[10px] uppercase text-slate-400 tracking-[3px] mb-1">Location</span>
-              <strong className="text-white tracking-wider text-sm flex items-center">
-                <svg className="w-4 h-4 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
+              <span className="text-[10px] uppercase tracking-[3px] mb-1" style={{ color: '#94a3b8' }}>Location</span>
+              <strong className="tracking-wider text-sm flex items-center" style={{ color: '#ffffff' }}>
+                <svg className="w-4 h-4 mr-2 text-[#d4af37]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
                 CIVIC CENTRE, VICTORIA ISLAND, LAGOS
               </strong>
             </div>
 
             <div className="flex flex-col">
-              <span className="text-[10px] uppercase text-slate-400 tracking-[3px] mb-1">Schedule</span>
-              <strong className="text-white tracking-wider text-sm">OCTOBER 2026</strong>
+              <span className="text-[10px] uppercase tracking-[3px] mb-1" style={{ color: '#94a3b8' }}>Schedule</span>
+              <strong className="tracking-wider text-sm" style={{ color: '#ffffff' }}>OCTOBER 2026</strong>
             </div>
           </div>
         </div>

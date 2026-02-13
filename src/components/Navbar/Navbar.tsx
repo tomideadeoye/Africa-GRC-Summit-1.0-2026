@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { ModeToggle } from "@/components/ModeToggle";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navItems = ['About', 'Audience', 'Partners', 'Venue'];
@@ -11,10 +9,10 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 h-20 z-50 flex items-center border-b border-primary/20 bg-black/80 backdrop-blur-md transition-colors duration-300">
+    <nav className="fixed top-0 left-0 right-0 h-20 z-50 flex items-center bg-black/90 backdrop-blur-md" style={{ borderBottom: '1px solid rgba(212,175,55,0.2)' }}>
       <div className="container flex justify-between items-center w-full px-6 mx-auto">
-        <div className="text-lg md:text-xl font-extrabold tracking-widest text-primary">
-          AFRICA <span className="text-white font-black">GRC SUMMIT</span> 2026
+        <div className="text-lg md:text-xl font-extrabold tracking-widest" style={{ color: '#d4af37' }}>
+          AFRICA <span className="font-black" style={{ color: '#ffffff' }}>GRC SUMMIT</span> 2026
         </div>
 
         {/* Desktop Navigation */}
@@ -23,24 +21,27 @@ export default function Navbar() {
             <a 
               key={item}
               href={`#${item.toLowerCase()}`} 
-              className="text-sm font-medium text-white/90 transition-all hover:text-primary hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]"
+              className="text-sm font-medium transition-all hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]"
+              style={{ color: 'rgba(255,255,255,0.9)' }}
             >
               {item}
             </a>
           ))}
-          <ModeToggle />
-          <Button 
-            className="bg-primary text-primary-foreground font-bold text-sm px-6 py-2 rounded-lg shadow-lg hover:shadow-[0_6px_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 transition-all uppercase tracking-wide"
+          <a 
+            href="#register"
+            className="font-bold text-sm px-6 py-2 rounded-lg shadow-lg hover:shadow-[0_6px_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 transition-all uppercase tracking-wide"
+            style={{ backgroundColor: '#d4af37', color: '#ffffff' }}
           >
             Registration
-          </Button>
+          </a>
         </div>
 
         {/* Mobile Hamburger */}
         <button 
-          className="md:hidden text-white p-2"
+          className="md:hidden p-2"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
+          style={{ color: '#ffffff' }}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -48,26 +49,28 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {mobileOpen && (
-        <div className="absolute top-20 left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-primary/20 md:hidden animate-fade-in">
+        <div className="absolute top-20 left-0 right-0 bg-black/95 backdrop-blur-xl md:hidden animate-fade-in" style={{ borderBottom: '1px solid rgba(212,175,55,0.2)' }}>
           <div className="container px-6 py-6 flex flex-col gap-4">
             {navItems.map((item) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 onClick={() => setMobileOpen(false)}
-                className="text-base font-medium text-white/90 py-3 border-b border-white/5 transition-all hover:text-primary hover:pl-2"
+                className="text-base font-medium py-3 transition-all hover:pl-2"
+                style={{ color: 'rgba(255,255,255,0.9)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
               >
                 {item}
               </a>
             ))}
-            <div className="flex items-center justify-between pt-4">
-              <ModeToggle />
-              <Button 
-                className="bg-primary text-primary-foreground font-bold text-sm px-6 py-2 rounded-lg shadow-lg uppercase tracking-wide"
+            <div className="flex items-center justify-end pt-4">
+              <a 
+                href="#register"
+                className="font-bold text-sm px-6 py-2 rounded-lg shadow-lg uppercase tracking-wide"
                 onClick={() => setMobileOpen(false)}
+                style={{ backgroundColor: '#d4af37', color: '#ffffff' }}
               >
                 Registration
-              </Button>
+              </a>
             </div>
           </div>
         </div>
