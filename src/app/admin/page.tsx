@@ -80,7 +80,7 @@ export default function AdminDashboard() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
-                { title: 'Calibrate Agenda', desc: 'Update sessions and curriculum', href: '/admin/agenda' },
+                { title: 'Manage Agenda', desc: 'Update sessions and curriculum', href: '/admin/agenda' },
                 { title: 'Hero Restoration', desc: 'Edit title and event details', href: '/admin/hero' },
                 { title: 'Speaker Gallery', desc: 'Manage bios and keynote list', href: '/admin/speakers' },
                 { title: 'Venue Protocol', desc: 'Update location and directions', href: '/admin/venue' },

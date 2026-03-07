@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Save, Clock, Brain, Target, Shield, Users, Layers } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, Users } from 'lucide-react';
 
 interface Session {
   id: string;
@@ -137,7 +137,7 @@ export default function AgendaManager() {
           <div>
             <h1 className="text-4xl font-black text-white mb-2 tracking-tight uppercase">Agenda Manager</h1>
             <p className="text-slate-400 font-medium">
-              Calibrate the Strategic Curriculum for Africa GRC Summit 1.0
+              Manage the agenda for Africa GRC Summit 1.0
             </p>
           </div>
           <div className="flex space-x-3">
@@ -154,7 +154,7 @@ export default function AgendaManager() {
               className="flex items-center px-8 py-2 bg-[#d4af37] hover:bg-[#b8960b] text-slate-900 font-black rounded-lg transition-colors disabled:opacity-50 uppercase tracking-widest text-sm"
             >
               <Save className="mr-2 h-4 w-4" />
-              {saving ? 'Saving...' : 'Deploy Changes'}
+              {saving ? 'Saving...' : 'Save Changes'}
             </button>
           </div>
         </div>
@@ -209,7 +209,7 @@ export default function AgendaManager() {
                 className="flex items-center px-4 py-2 bg-white/5 hover:bg-white/10 text-white font-bold rounded-sm border border-white/10 transition-all text-xs uppercase"
               >
                 <Plus className="mr-2 h-3 w-3 text-[#d4af37]" />
-                Inject Session
+                Add Session
               </button>
             </div>
             
@@ -260,7 +260,7 @@ export default function AgendaManager() {
       {editingSession && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
           <div className="bg-[#020617] border border-white/10 p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-            <h2 className="text-2xl font-black text-white uppercase mb-8 border-b border-white/5 pb-4">Calibrate Session</h2>
+            <h2 className="text-2xl font-black text-white uppercase mb-8 border-b border-white/5 pb-4">Edit Session</h2>
             
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -361,7 +361,7 @@ export default function AgendaManager() {
                 onClick={() => setEditingSession(null)}
                 className="px-6 py-2 text-slate-400 hover:text-white uppercase font-bold text-xs tracking-widest"
               >
-                Abort
+                Cancel
               </button>
               <button
                 onClick={() => {
@@ -370,7 +370,7 @@ export default function AgendaManager() {
                 }}
                 className="px-10 py-3 bg-[#d4af37] hover:bg-[#b8960b] text-slate-900 font-black rounded-sm uppercase tracking-widest text-xs"
               >
-                Apply Calibration
+                Save Session
               </button>
             </div>
           </div>

@@ -52,7 +52,7 @@ export default function Programme() {
       <section id="programme" className="py-24 bg-[#020617] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-gold/20 border-t-gold rounded-full animate-spin" />
-          <p className="text-gold font-black uppercase tracking-widest text-sm">Synchronizing Intelligence...</p>
+          <p className="text-gold font-black uppercase tracking-widest text-sm">Loading Agenda...</p>
         </div>
       </section>
     );

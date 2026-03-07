@@ -1,50 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { MoveRight, ShieldCheck, ChevronDown, Calendar, MapPin } from "lucide-react";
 import CredibilityStrip from "../CredibilityStrip/CredibilityStrip";
 import { FadeIn, StaggerContainer, StaggerItem } from "../ui/FadeIn";
 import { AuroraText } from "../ui/aurora-text";
 import { InteractiveGridPattern } from "../ui/interactive-grid-pattern";
+import type { HeroConfig } from "@/lib/config-store";
 
-interface HeroData {
-  title: string;
-  subtitle: string;
-  dates: string;
-  venue: string;
-  tagline: string;
-  badge: string;
-  status: string;
-}
+type HeroProps = {
+  initialData?: HeroConfig | null;
+};
 
-export default function Hero() {
-  const [data, setData] = useState<HeroData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchHeroData = async () => {
-      try {
-        const res = await fetch('/api/admin/config');
-        const config = await res.json();
-        if (config.hero) {
-          setData(config.hero);
-        }
-      } catch (error) {
-        console.error("Failed to synchronize hero intelligence:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchHeroData();
-  }, []);
-
-  if (loading) return (
-     <section className="relative min-h-screen bg-[var(--brand-navy)] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-[var(--brand-gold)]/20 border-t-[var(--brand-gold)] rounded-full animate-spin" />
-     </section>
-  );
-
-  const hero = data || {
+export default function Hero({ initialData }: HeroProps) {
+  const fallbackHero = {
     title: "AFRICA GRC SUMMIT 1.0",
     subtitle: "The Future of GRC: Intelligent. Integrated. Insight-Driven",
     dates: "October 21-22, 2026",
@@ -53,6 +21,7 @@ export default function Hero() {
     badge: "By Invitation Only",
     status: "ENROLLMENT OPEN"
   };
+  const hero = { ...fallbackHero, ...(initialData || {}) };
 
   return (
     <section className="relative min-h-screen flex flex-col bg-[var(--brand-navy)] overflow-hidden">
@@ -138,13 +107,13 @@ export default function Hero() {
 
           {/* Tagline */}
           <StaggerItem>
-            <p className="mt-12 text-slate-400 text-xs md:text-sm font-bold tracking-[0.4em] uppercase max-w-2xl opacity-60 italic">
+            <p className="mt-14 text-slate-400 text-xs md:text-sm font-bold tracking-[0.32em] uppercase max-w-2xl opacity-70 leading-relaxed">
                {hero.tagline}
             </p>
           </StaggerItem>
   {/* Status Badge */}
           <StaggerItem>
-            <div className="flex items-center space-x-3 mb-10 px-5 py-2 rounded-sm bg-white/5 border border-white/10 backdrop-blur-md">
+            <div className="flex items-center space-x-3 mb-10 px-5 py-2 rounded-sm bg-white/5 border border-white/10 backdrop-blur-md mt-5">
                 <div className="w-1.5 h-1.5 bg-[var(--brand-gold)] rounded-full animate-pulse" />
                 <span className="text-[var(--brand-gold)] text-[9px] font-black uppercase tracking-[0.5em]">
                   {hero.badge}

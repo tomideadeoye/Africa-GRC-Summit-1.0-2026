@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
 import { supabase } from '@/lib/supabase';
+import { getMasterConfig } from '@/lib/config-store';
 
 const DATA_FILE = path.join(process.cwd(), 'src/data/summit-config.json');
 
@@ -15,32 +16,7 @@ const TABLE_NAME = 'summit_config';
  */
 export async function GET() {
   try {
-    // 1. Try to fetch from Supabase
-    const { data: dbData, error: dbError } = await supabase
-      .from(TABLE_NAME)
-      .select('content')
-      .eq('id', MASTER_CONFIG_ID)
-      .single();
-
-    if (dbData?.content) {
-      // Supabase is the primary source of truth
-      return NextResponse.json(dbData.content);
-    }
-
-    // 2. Clear Supabase Error or Handle Empty Content -> Fallback to Local
-    console.warn('Supabase config fetch failed or empty. Falling back to local file.', dbError);
-    const localData = await readFile(DATA_FILE, 'utf-8');
-    const config = JSON.parse(localData);
-
-    // 3. Proactively attempt to seed Supabase with the local data if it's missing
-    // This handles the first run when the table is empty but exists
-    if (!dbData) {
-      await supabase.from(TABLE_NAME).upsert({
-        id: MASTER_CONFIG_ID,
-        content: config
-      });
-    }
-
+    const config = await getMasterConfig();
     return NextResponse.json(config);
   } catch (error) {
     console.error('Master config error:', error);
@@ -68,20 +44,7 @@ export async function PUT(request: Request) {
     }
 
     // 1. Fetch current config from Supabase (Prime Source)
-    let config: any;
-    const { data: dbData } = await supabase
-      .from(TABLE_NAME)
-      .select('content')
-      .eq('id', MASTER_CONFIG_ID)
-      .single();
-
-    if (dbData?.content) {
-      config = dbData.content;
-    } else {
-      // Fallback to local if Supabase is empty
-      const localData = await readFile(DATA_FILE, 'utf-8');
-      config = JSON.parse(localData);
-    }
+    const config: Record<string, unknown> = await getMasterConfig();
 
     // 2. Perform the update
     config[section] = data;
@@ -101,11 +64,11 @@ export async function PUT(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: `${section} recalibrated and synchronized successfully.`,
+      message: `${section} updated successfully.`,
       source: syncError ? 'local only' : 'global'
     });
   } catch (error) {
     console.error('Configuration update failure:', error);
-    return NextResponse.json({ error: 'Failed to update intelligence' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to update configuration' }, { status: 500 });
   }
 }
