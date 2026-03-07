@@ -3,7 +3,10 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://africa-grc-summit-2026.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Africa GRC Summit 1.0 (2026)",
   description: "The Future of GRC: Intelligent, Integrated and Insight-Driven",
   openGraph: {
