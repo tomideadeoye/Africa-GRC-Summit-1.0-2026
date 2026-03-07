@@ -11,7 +11,7 @@ export default function Footer() {
             <img 
               src="/branding/logo-main.png" 
               alt="Africa GRC Summit 1.0" 
-              className="h-4 md:h-5 w-auto object-contain mb-8 grayscale brightness-200"
+              className="h-10 md:h-12 w-auto object-contain mb-8 grayscale brightness-200"
             />
             <p className="text-white/60 mb-8 max-w-sm leading-relaxed text-[10px] font-black uppercase tracking-widest">
               The premier gathering for governance, risk, and compliance leaders shaping the future of African digital trust and institutional trust.
@@ -51,7 +51,10 @@ export default function Footer() {
                 </li>
               </ul>
               
-              <a href="/register" className="inline-flex items-center text-[var(--brand-gold)] font-black text-[10px] uppercase tracking-widest hover:text-white transition-colors group">
+              <a
+                href="mailto:info@africagrcsummit.com?subject=Interest%20in%20Africa%20GRC%20Summit%202026&body=Hello%20Africa%20GRC%20Summit%20Team%2C%0A%0AI%20am%20interested%20in%20learning%20more%20about%20the%20event.%20Please%20share%20details%20on%20attendance%2C%20agenda%2C%20and%20participation.%0A%0AThank%20you."
+                className="inline-flex items-center text-[var(--brand-gold)] font-black text-[10px] uppercase tracking-widest hover:text-white transition-colors group"
+              >
                  Register Interest <ArrowUpRight size={14} className="ml-1 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </a>
           </div>

@@ -25,7 +25,7 @@ export default function Navbar() {
           <img
             src="/branding/logo-main.png"
             alt="Africa GRC Summit 1.0"
-            className="h-8 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+            className="h-10 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
           />
         </a>
 

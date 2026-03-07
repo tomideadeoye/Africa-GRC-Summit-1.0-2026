@@ -68,79 +68,89 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--brand-navy)] via-transparent to-[var(--brand-navy)] opacity-60 pointer-events-none" />
       </div>
 
-      <div className="flex-1 flex flex-col justify-center container px-6 mx-auto relative z-10 py-24 pointer-events-none">
-        <StaggerContainer className="flex flex-col items-center text-center pointer-events-auto">
-          {/* Main Heading */}
+      <div className="flex-1 flex flex-col justify-center container px-5 md:px-6 mx-auto relative z-10 py-20 md:py-24">
+        <StaggerContainer className="flex flex-col items-center md:items-start text-center md:text-left max-w-5xl w-full">
+
+          {/* Unified Identity Component */}
           <StaggerItem>
-            <h1 className="text-3xl md:text-5xl lg:text-7xl font-black text-white leading-none tracking-tighter mb-8 uppercase flex flex-col items-center gap-2">
-              <span className="block opacity-90">{hero.title.split(' ')[0]}</span>
-              <div className="flex items-center gap-3">
-                <AuroraText 
-                  colors={["#ffd07e", "#ffffff", "#6dacca", "#ffd07e"]}
-                >
-                  GRC SUMMIT
-                </AuroraText>
-                <span className="text-2xl md:text-4xl lg:text-5xl opacity-50 font-light italic">1.0</span>
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-5 md:gap-10 mb-10 md:mb-14 p-1 md:p-2 w-full">
+              {/* Part 1: Logo Mark - Spans from AFRICA to divider line */}
+              <div className="flex items-stretch shrink-0 justify-center">
+                <img 
+                  src="/branding/logo-main.png" 
+                  alt="Africa GRC Logo Mark" 
+                  className="h-24 sm:h-28 md:h-40 lg:h-48 w-auto object-contain"
+                  style={{ imageRendering: '-webkit-optimize-contrast' }}
+                />
               </div>
-            </h1>
+
+              {/* Part 2: Strategic Text Group */}
+              <div className="flex flex-col items-center md:items-start leading-none w-full max-w-[22ch] md:max-w-[24ch] lg:max-w-[26ch]">
+                <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white/50 tracking-[0.2em] md:tracking-[0.3em] block uppercase">
+                  {hero.title.split(' ')[0]}
+                </span>
+                
+                <div className="flex items-end justify-center md:justify-start gap-2 sm:gap-3 md:gap-5 mt-2">
+                  <AuroraText 
+                    className="text-[clamp(2.5rem,13vw,4.4rem)] md:text-7xl lg:text-8xl font-black tracking-tighter block uppercase py-1 md:py-2 whitespace-nowrap"
+                    colors={["#ffd07e", "#ffffff", "#6dacca", "#ffd07e"]}
+                  >
+                    GRC SUMMIT
+                  </AuroraText>
+                  <span className="text-[clamp(1.9rem,9vw,3.1rem)] md:text-5xl lg:text-6xl opacity-30 font-light italic tracking-[0.12em] md:tracking-[0.2em] text-white pb-1 md:pb-2 whitespace-nowrap">1.0</span>
+                </div>
+
+       
+                {/* Divider line - logo ends here */}
+                <div className="h-px w-full bg-gradient-to-r from-white/20 to-transparent mt-5 md:mt-6" />
+              </div>
+            </div>
           </StaggerItem>
 
-          {/* Subtitle */}
-          <StaggerItem>
-            <h2 className="text-[var(--brand-gold)] text-lg md:text-2xl font-bold uppercase tracking-widest mb-10 text-center max-w-4xl leading-relaxed">
-              {hero.subtitle}
-            </h2>
-          </StaggerItem>
+         {/* Subtitle */}
+                <h2 className="text-[var(--brand-gold)] text-base sm:text-lg md:text-2xl font-bold uppercase tracking-[0.12em] md:tracking-widest max-w-[24ch] md:max-w-3xl leading-tight border-l-4 border-[var(--brand-gold)] pl-5 md:pl-6 mt-3 md:mt-4">
+                  {hero.subtitle}
+                </h2>
 
-          {/* Metadata Block (Dates & Venue) */}
-          <StaggerItem className="w-full flex justify-center">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12 px-6 py-4 border-y border-white/5 w-full max-w-2xl bg-white/[0.02]">
-             <div className="flex items-center space-x-3">
-                <Calendar className="text-[var(--brand-gold)] w-4 h-4" />
-                <div className="text-left">
-                   <span className="text-white font-black uppercase tracking-widest text-[10px]">{hero.dates}</span>
+
+          {/* Metadata Block */}
+          <StaggerItem className="w-full mt-7 md:mt-8">
+            <div className="flex flex-col md:flex-row items-stretch justify-start gap-1 p-1 bg-white/5 border border-white/10 max-w-3xl">
+              <div className="flex-1 p-4 sm:p-5 md:p-7 flex items-center space-x-4 md:space-x-5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+                <div className="p-2.5 md:p-3 bg-[var(--brand-gold)]/10 rounded-sm">
+                  <Calendar className="text-[var(--brand-gold)] w-5 h-5 md:w-6 md:h-6" />
                 </div>
-             </div>
-             <div className="w-px h-4 bg-white/10 hidden md:block"></div>
-             <div className="flex items-center space-x-3">
-                <MapPin className="text-[var(--brand-gold)] w-4 h-4" />
-                <div className="text-left">
-                   <span className="text-white font-black uppercase tracking-widest text-[10px]">{hero.venue}</span>
+                <div className="flex flex-col">
+                  <span className="text-white font-black uppercase tracking-[0.08em] md:tracking-[0.12em] text-xs md:text-sm leading-tight">{hero.dates}</span>
                 </div>
-             </div>
+              </div>
+              <div className="hidden md:block w-px bg-white/10" />
+              <div className="flex-1 p-4 sm:p-5 md:p-7 flex items-center space-x-4 md:space-x-5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+                <div className="p-2.5 md:p-3 bg-[var(--brand-gold)]/10 rounded-sm">
+                  <MapPin className="text-[var(--brand-gold)] w-5 h-5 md:w-6 md:h-6" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-white font-black uppercase tracking-[0.08em] md:tracking-[0.12em] text-xs md:text-sm leading-tight">{hero.venue}</span>
+                </div>
+              </div>
             </div>
           </StaggerItem>
 
           {/* Tagline */}
           <StaggerItem>
-            <p className="text-slate-300 text-sm md:text-base font-medium tracking-widest uppercase mb-8 text-center max-w-2xl">
-              {hero.tagline}
+            <p className="mt-12 text-slate-400 text-xs md:text-sm font-bold tracking-[0.4em] uppercase max-w-2xl opacity-60 italic">
+               {hero.tagline}
             </p>
           </StaggerItem>
-
-          {/* Status Badge */}
+  {/* Status Badge */}
           <StaggerItem>
-            <div className="flex items-center space-x-3 mb-6 px-4 py-1.5 rounded-sm bg-white/5 border border-white/10 backdrop-blur-md">
-                <ShieldCheck className="text-[var(--brand-gold)] w-3 h-3" />
-                <span className="text-[var(--brand-gold)] text-[8px] font-black uppercase tracking-[0.4em]">
+            <div className="flex items-center space-x-3 mb-10 px-5 py-2 rounded-sm bg-white/5 border border-white/10 backdrop-blur-md">
+                <div className="w-1.5 h-1.5 bg-[var(--brand-gold)] rounded-full animate-pulse" />
+                <span className="text-[var(--brand-gold)] text-[9px] font-black uppercase tracking-[0.5em]">
                   {hero.badge}
                 </span>
             </div>
           </StaggerItem>
-
-          {/* CTA Group */}
-          {/* COMMENTED OUT - Pending client approval
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <button className="group relative px-12 py-5 bg-[var(--brand-gold)] hover:bg-white text-slate-900 font-black rounded-sm transition-all duration-500 uppercase tracking-widest text-[10px] overflow-hidden shadow-[0_0_30px_rgba(var(--brand-gold-rgb),0.3)] hover:shadow-[0_0_50px_rgba(255,255,255,0.4)]">
-              <span className="relative z-10 flex items-center">
-                Access Gateway <MoveRight className="ml-3 group-hover:translate-x-2 transition-transform" size={16} />
-              </span>
-            </button>
-            <button className="px-12 py-5 bg-transparent border border-white/20 hover:border-[var(--brand-gold)] text-white hover:text-[var(--brand-gold)] font-black rounded-sm transition-all duration-500 uppercase tracking-widest text-[10px] flex items-center">
-              Download Prospectus
-            </button>
-          </div>
-          */}
         </StaggerContainer>
       </div>
 

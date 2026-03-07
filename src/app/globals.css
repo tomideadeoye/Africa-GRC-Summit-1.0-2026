@@ -197,8 +197,9 @@ html {
   scroll-padding-top: 5rem; /* Height of the sticky navbar + cushion */
 }
 
-/* Ensure images don't overflow */
-img {
+/* Opt-in responsive image behavior for rich text/CMS content */
+.rich-content img,
+.img-fluid {
   max-width: 100%;
   height: auto;
 }

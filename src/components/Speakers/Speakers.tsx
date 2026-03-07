@@ -243,9 +243,12 @@ export default function Speakers() {
              </div>
              <h3 className="text-2xl font-black text-white uppercase mb-4 tracking-tight">Nominate a <br />Strategic Leader</h3>
              <p className="text-[10px] text-slate-500 mb-10 font-black uppercase tracking-widest leading-relaxed">Join our global faculty of <br />governance and risk architects.</p>
-             <button className="px-10 py-4 bg-[var(--brand-gold)]/10 hover:bg-[var(--brand-gold)] border border-[var(--brand-gold)]/40 text-[var(--brand-gold)] hover:text-slate-900 font-black uppercase tracking-[0.2em] text-[10px] transition-all">
+             <a
+                href={`mailto:info@africagrcsummit.com?subject=${encodeURIComponent("Speaker Nomination: Africa GRC Summit 1.0 (2026)")}&body=${encodeURIComponent("Dear Africa GRC Summit Team,\n\nI would like to nominate a distinguished leader for consideration as a speaker at the Africa GRC Summit 1.0 (2026).\n\nNominee Details:\nFull Name: \nJob Title: \nOrganization: \nLinkedIn Profile: \nArea of Expertise: \n\nBrief Reason for Nomination:\n\n\nNominator Details:\nYour Name: \nYour Email: \nYour Organization: \n\nThank you for considering this nomination.\n\nBest regards,\n")}`}
+                className="px-10 py-4 bg-[var(--brand-gold)]/10 hover:bg-[var(--brand-gold)] border border-[var(--brand-gold)]/40 text-[var(--brand-gold)] hover:text-slate-900 font-black uppercase tracking-[0.2em] text-[10px] transition-all inline-block"
+              >
                 Submit Nomination
-             </button>
+             </a>
           </div>
         </div>
 

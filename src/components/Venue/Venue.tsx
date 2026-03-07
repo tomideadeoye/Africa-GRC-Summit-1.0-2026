@@ -60,18 +60,19 @@ export default function Venue() {
         <FadeIn delay={0.2} className="grid grid-cols-1 lg:grid-cols-3 overflow-hidden shadow-2xl max-w-6xl mx-auto border border-slate-200 relative bg-white rounded-sm">
           
           {/* Info Card */}
-          <div className="lg:col-span-1 bg-slate-50 p-10 flex flex-col justify-center relative z-20 overflow-hidden border-r border-slate-100">
+          <div className="lg:col-span-1 bg-[var(--brand-navy)] p-10 flex flex-col justify-center relative z-20 overflow-hidden border-r border-white/10">
             {/* Background Image with Overlay */}
             <div 
-              className="absolute inset-0 z-0 opacity-20 bg-cover bg-center"
+              className="absolute inset-0 z-0 opacity-30 bg-cover bg-center"
               style={{ backgroundImage: `url('${venue.backgroundImage}')` }}
             ></div>
-            <div className="absolute inset-0 bg-slate-950/80 z-1"></div>
+            <div className="absolute inset-0 z-10 bg-gradient-to-b from-[var(--brand-navy)]/78 via-[var(--brand-navy)]/88 to-[var(--brand-navy)]/96"></div>
+            <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_top_left,rgba(255,208,126,0.10),transparent_55%)]"></div>
  
-            <div className="relative z-10 space-y-12">
+            <div className="relative z-20 space-y-12">
                 <div className="space-y-4">
                     <h3 className="text-[10px] font-black text-[var(--brand-gold)] uppercase tracking-[0.3em]">Location</h3>
-                    <p className="text-slate-900 text-xl font-black uppercase tracking-tighter leading-tight">
+                    <p className="text-white text-xl font-black uppercase tracking-tighter leading-tight">
                         {venue.name}, <br />
                         {venue.address}
                     </p>
@@ -85,7 +86,7 @@ export default function Venue() {
                           href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue.name + ' ' + venue.address)}`} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-slate-900 font-black text-sm hover:text-[var(--brand-gold)] transition-colors flex items-center group uppercase tracking-widest"
+                          className="text-white/90 font-black text-sm hover:text-[var(--brand-gold)] transition-colors flex items-center group uppercase tracking-widest"
                         >
                             Get Directions
                             <Navigation className="ml-2 h-3 w-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
