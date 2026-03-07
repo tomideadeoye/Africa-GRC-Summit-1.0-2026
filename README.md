@@ -40,5 +40,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
 
----
-*Created by Orion — The Sovereign Architect.*
+---*Official Summit Platform 2026*

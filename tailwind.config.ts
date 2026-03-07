@@ -41,6 +41,11 @@ const config: Config = {
                     DEFAULT: 'hsl(var(--destructive))',
                     foreground: 'hsl(var(--destructive-foreground))'
                 },
+                gold: {
+                    DEFAULT: "#d4af37",
+                    light: "#fcd34d",
+                    dark: "#b4941f",
+                },
                 border: 'hsl(var(--border))',
                 input: 'hsl(var(--input))',
                 ring: 'hsl(var(--ring))',

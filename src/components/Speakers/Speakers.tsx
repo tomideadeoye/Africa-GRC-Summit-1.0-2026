@@ -1,112 +1,261 @@
-import { Button } from "@/components/ui/button";
-import { User } from "lucide-react";
+"use client";
 
-// Placeholder data based on the reference image provided
-const speakers = [
-  {
-    name: "Eng. Thamer Al Hamed",
-    role: "Executive GM of GRC",
-    company: "Confidential Government",
-    image: "/placeholder-user.jpg"
-  },
-  {
-    name: "Abdallah Dahhan",
-    role: "Chief Risk Officer",
-    company: "Al Yusr Leasing and Finance, KSA",
-    image: "/placeholder-user.jpg"
-  },
-  {
-    name: "Walid Shukri",
-    role: "Board Member, Chairman Audit",
-    company: "STC",
-    image: "/placeholder-user.jpg"
-  },
-  {
-    name: "Dr. Sultan Alsajjan",
-    role: "Governance & Executive Support",
-    company: "Confidential Government, KSA",
-    image: "/placeholder-user.jpg"
-  },
-  {
-    name: "Dr. Roger Barker",
-    role: "Chief Research Officer",
-    company: "Center for Governance, KSA",
-    image: "/placeholder-user.jpg"
-  },
-  {
-    name: "Abdullah Aldahami",
-    role: "General Manager, Internal Audit",
-    company: "Sirar by STC",
-    image: "/placeholder-user.jpg"
-  }
-];
+import { useState, useEffect } from "react";
+import { User, Users, Linkedin, ExternalLink, ShieldCheck, X } from "lucide-react";
+import { AuroraText } from "../ui/aurora-text";
+
+interface Speaker {
+  id: string;
+  name: string;
+  title: string;
+  company: string;
+  image?: string;
+  linkedin?: string;
+  bio?: string;
+}
+
+interface SpeakerModalProps {
+  speaker: Speaker;
+  onClose: () => void;
+}
+
+function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm" onClick={onClose}>
+      <div 
+        className="relative w-full max-w-4xl bg-[var(--brand-navy)] border border-white/10 rounded-sm overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 z-10 p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"
+        >
+          <X size={24} className="text-white" />
+        </button>
+
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Left: Image */}
+          <div className="relative aspect-[4/5] md:aspect-auto">
+            {speaker.image ? (
+              <img
+                src={speaker.image}
+                alt={speaker.name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-slate-950">
+                <User size={120} className="text-slate-800" />
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-navy)] via-transparent to-transparent md:bg-gradient-to-r" />
+          </div>
+
+          {/* Right: Content */}
+          <div className="p-12 flex flex-col justify-center">
+            {/* Badge */}
+            <div className="flex items-center gap-2 mb-6">
+              <ShieldCheck size={16} className="text-[var(--brand-gold)]" />
+              <span className="text-[10px] font-black text-[var(--brand-gold)] uppercase tracking-[0.3em]">
+                Global Faculty
+              </span>
+            </div>
+
+            {/* Name */}
+            <h2 className="text-4xl font-black text-white uppercase tracking-tighter mb-4">
+              {speaker.name}
+            </h2>
+
+            {/* Title & Company */}
+            <div className="mb-8">
+              <p className="text-lg font-black text-[var(--brand-gold)] uppercase tracking-tight mb-1">
+                {speaker.title}
+              </p>
+              <p className="text-sm font-bold text-slate-400 uppercase tracking-wider">
+                {speaker.company}
+              </p>
+            </div>
+
+            {/* Bio */}
+            {speaker.bio && (
+              <div className="mb-8">
+                <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">
+                  Biography
+                </h3>
+                <p className="text-slate-300 leading-relaxed font-medium">
+                  {speaker.bio}
+                </p>
+              </div>
+            )}
+
+            {/* Social Links */}
+            <div className="flex items-center gap-6 pt-8 border-t border-white/10">
+              {speaker.linkedin && (
+                <a
+                  href={speaker.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-slate-400 hover:text-[var(--brand-gold)] transition-colors group"
+                >
+                  <Linkedin size={20} />
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] group-hover:text-[var(--brand-gold)]">
+                    Connect on LinkedIn
+                  </span>
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Speakers() {
+  const [speakers, setSpeakers] = useState<Speaker[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
+
+  useEffect(() => {
+    const fetchSpeakers = async () => {
+      try {
+        const res = await fetch('/api/admin/config');
+        const data = await res.json();
+        if (data.speakers) {
+          setSpeakers(data.speakers);
+        }
+      } catch (error) {
+        console.error('Error fetching speakers:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSpeakers();
+  }, []);
+
+  if (loading) return null;
+  if (speakers.length === 0) return null;
+
   return (
-    <section id="speakers" className="py-24 bg-slate-50 dark:bg-[#0f172a] relative overflow-hidden transition-colors duration-300">
+    <section id="speakers" className="py-32 bg-[var(--brand-navy)] relative overflow-hidden">
       {/* Background Watermark */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 select-none pointer-events-none z-0">
-         <span className="text-[8rem] md:text-[14rem] font-black text-slate-200 dark:text-slate-800/50 opacity-40 tracking-tighter whitespace-nowrap">
-          speakers
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 select-none pointer-events-none z-0 opacity-[0.03]">
+         <span className="text-[15vw] font-black text-white tracking-tighter uppercase">
+          FACULTY
         </span>
       </div>
 
       <div className="container px-6 mx-auto relative z-10">
-        <div className="text-center mb-16 animate-fade-in-up">
-           <span className="text-[#d4af37] font-bold tracking-wider text-xs md:text-sm uppercase mb-3 block">
-            #gprcsummit
-          </span>
-           <h2 className="text-4xl md:text-5xl font-black mb-12 text-foreground dark:text-white tracking-tight">
-            Summit Speakers 2026
-          </h2>
+        <div className="max-w-4xl mb-24 text-left">
+           <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-12 bg-[var(--brand-gold)]" />
+              <span className="text-[var(--brand-gold)] font-black tracking-[0.4em] text-[10px] uppercase">
+                Distinguished Leadership
+              </span>
+           </div>
+           <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+             The Architects of <br />
+             <AuroraText colors={["#ffd07e", "#ffffff", "#6dacca", "#ffd07e"]}>Governance</AuroraText>
+           </h2>
+           <p className="text-slate-400 text-lg font-medium leading-relaxed uppercase tracking-widest max-w-2xl">
+             Africa GRC Summit 1.0 features respected global and African leaders shaping governance, regulatory oversight and digital resilience.
+           </p>
+           <p className="text-[#d4af37] text-sm font-bold mt-4 uppercase tracking-[0.2em] italic">
+             Additional executive speakers and regulatory leaders will be announced.
+           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
-          {speakers.map((speaker, idx) => (
-            <div 
-              key={idx} 
-              className="bg-white dark:bg-[#1e293b] rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group border border-slate-100 dark:border-slate-700/50"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+          {speakers.map((speaker) => (
+            <div
+              key={speaker.id}
+              onClick={() => setSelectedSpeaker(speaker)}
+              className="group relative flex flex-col bg-white/[0.02] border border-white/5 hover:border-[var(--brand-gold)]/40 transition-all duration-500 rounded-sm overflow-hidden cursor-pointer"
             >
-              {/* Image Container with Geometric Shapes */}
-              <div className="relative h-64 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex items-end justify-center">
-                {/* Yellow Accents - Top Right */}
-                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFC107] rounded-bl-[100px] z-0 opacity-90 transition-transform group-hover:scale-110 duration-500" />
-                 
-                 {/* Blue Accents - Bottom Left */}
-                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#90CAF9] rounded-tr-[100px] z-0 opacity-90 transition-transform group-hover:scale-110 duration-500" />
+              {/* Profile Header Image Area */}
+              <div className="relative aspect-[4/5] bg-black/40 overflow-hidden">
+                {speaker.image ? (
+                  <img
+                    src={speaker.image}
+                    alt={speaker.name}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-slate-950">
+                    <User size={80} className="text-slate-800" />
+                  </div>
+                )}
 
-                 {/* Placeholder Image / Avatar */}
-                 <div className="relative z-10 w-40 h-40 mb-4 rounded-full bg-slate-200 dark:bg-slate-700 border-4 border-white dark:border-slate-600 shadow-md flex items-center justify-center">
-                    <User size={64} className="text-slate-400 dark:text-slate-500" />
-                 </div>
+                {/* Decorative Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-navy)] via-transparent to-transparent opacity-80" />
+
+                {/* Badge */}
+                <div className="absolute top-6 left-6">
+                   <div className="bg-[var(--brand-gold)] p-2 rounded-sm shadow-xl">
+                      <ShieldCheck size={16} className="text-slate-950" />
+                   </div>
+                </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6 text-center">
-                <h3 className="text-lg font-bold text-foreground dark:text-white mb-2 leading-tight">
-                  {speaker.name}
-                </h3>
-                <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 line-clamp-1">
-                  {speaker.role}
-                </p>
-                <p className="text-xs text-muted-foreground dark:text-slate-400 line-clamp-2">
-                  {speaker.company}
-                </p>
+              {/* Speaker Content */}
+              <div className="p-10">
+                <div className="mb-8">
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2 group-hover:text-[var(--brand-gold)] transition-colors">
+                    {speaker.name}
+                  </h3>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1 leading-tight">
+                      {speaker.title}
+                    </span>
+                    <span className="text-xs font-bold text-[var(--brand-gold)] uppercase tracking-tight opacity-70">
+                      {speaker.company}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-8 border-t border-white/5">
+                   {speaker.linkedin && (
+                     <a
+                       href={speaker.linkedin}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       onClick={(e) => e.stopPropagation()}
+                       className="text-slate-500 hover:text-[var(--brand-gold)] transition-colors"
+                     >
+                       <Linkedin size={20} />
+                     </a>
+                   )}
+                   <button className="flex items-center gap-2 text-[10px] font-black text-[var(--brand-gold)] uppercase tracking-[0.2em] hover:gap-4 transition-all">
+                      View Profile <ExternalLink size={12} />
+                   </button>
+                </div>
               </div>
+
+              {/* Hover Glow */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[var(--brand-gold)]/0 via-[var(--brand-gold)]/0 to-[var(--brand-gold)]/0 group-hover:from-[var(--brand-gold)]/5 transition-all duration-500 pointer-events-none" />
             </div>
           ))}
+
+          {/* Call to Action Card */}
+          <div className="relative flex flex-col items-center justify-center p-12 bg-white/[0.01] border-2 border-dashed border-white/5 hover:border-[var(--brand-gold)]/40 transition-all rounded-sm group text-center">
+             <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-8 group-hover:bg-[var(--brand-gold)]/10 transition-colors">
+                <Users size={40} className="text-slate-600 group-hover:text-[var(--brand-gold)]" />
+             </div>
+             <h3 className="text-2xl font-black text-white uppercase mb-4 tracking-tight">Nominate a <br />Strategic Leader</h3>
+             <p className="text-[10px] text-slate-500 mb-10 font-black uppercase tracking-widest leading-relaxed">Join our global faculty of <br />governance and risk architects.</p>
+             <button className="px-10 py-4 bg-[var(--brand-gold)]/10 hover:bg-[var(--brand-gold)] border border-[var(--brand-gold)]/40 text-[var(--brand-gold)] hover:text-slate-900 font-black uppercase tracking-[0.2em] text-[10px] transition-all">
+                Submit Nomination
+             </button>
+          </div>
         </div>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up">
-           <Button className="bg-[#FFC107] hover:bg-[#FFD54F] text-black font-bold uppercase tracking-wider px-8 py-6 rounded-md shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-            Become a speaker
-          </Button>
-           <Button className="bg-[#FFC107] hover:bg-[#FFD54F] text-black font-bold uppercase tracking-wider px-8 py-6 rounded-md shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-            Past Speakers
-          </Button>
-        </div>
-
+        {/* Speaker Profile Modal */}
+        {selectedSpeaker && (
+          <SpeakerModal
+            speaker={selectedSpeaker}
+            onClose={() => setSelectedSpeaker(null)}
+          />
+        )}
       </div>
     </section>
   );

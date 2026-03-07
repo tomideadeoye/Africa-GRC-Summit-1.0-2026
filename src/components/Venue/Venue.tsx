@@ -1,53 +1,94 @@
-import { MapPin, Navigation, Calendar } from "lucide-react";
+"use client";
+
+import { useState, useEffect } from "react";
+import { Loader2, MapPin, Navigation, Calendar } from "lucide-react";
+import { FadeIn } from "../ui/FadeIn";
 
 export default function Venue() {
+  const [venueData, setVenueData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchVenue = async () => {
+      try {
+        const res = await fetch('/api/admin/config');
+        const data = await res.json();
+        if (data.venue) {
+          setVenueData(data.venue);
+        }
+      } catch (error) {
+        console.error('Failed to fetch venue data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVenue();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="py-24 bg-[var(--brand-navy)] flex items-center justify-center">
+        <Loader2 className="animate-spin text-[var(--brand-gold)]" size={32} />
+      </div>
+    );
+  }
+
+  // Fallback if no data
+  const venue = venueData || {
+    name: "Sheraton Lagos Hotel",
+    address: "30 Mobolaji Bank Anthony Way, Ikeja, Lagos, Nigeria",
+    mapEmbedUrl: "https://maps.google.com/maps?q=Sheraton+Lagos+Hotel,+Ikeja,+Lagos&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    backgroundImage: "https://app-ei-live.ams3.cdn.digitaloceanspaces.com/property/images/2021/05/d2663a1f2aab19912a461cc60479e82d.jpg"
+  };
+
   return (
-    <section id="venue" className="py-24 bg-slate-50 dark:bg-[#050a11] relative overflow-hidden transition-colors duration-300">
+    <section id="venue" className="py-32 bg-white relative overflow-hidden">
       {/* Background Text Watermark */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 text-[15vw] font-black text-slate-200/40 dark:text-white/5 whitespace-nowrap select-none pointer-events-none lowercase leading-none z-0">
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 text-[15vw] font-black text-slate-900 opacity-[0.03] whitespace-nowrap select-none pointer-events-none lowercase leading-none z-0">
         venue
       </div>
 
       <div className="container px-6 mx-auto relative z-10">
-        <div className="text-center mb-16 animate-fade-in-up">
-            <span className="text-primary font-semibold tracking-widest text-sm uppercase mb-2 block">#AfricaGRCSummit2026</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-foreground dark:text-white leading-tight">
-                Directions to the event venue
+        <FadeIn className="text-center mb-16">
+            <span className="text-[var(--brand-gold)] font-black tracking-[0.3em] text-[10px] uppercase mb-2 block">#AfricaGRCSummit2026</span>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight uppercase tracking-tighter">
+                Directions to the summit venue
             </h2>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full mt-6" />
-        </div>
+            <div className="w-24 h-1 bg-[var(--brand-gold)] mx-auto rounded-full mt-6" />
+        </FadeIn>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 rounded-2xl overflow-hidden shadow-2xl max-w-6xl mx-auto border border-primary/10 relative">
+        <FadeIn delay={0.2} className="grid grid-cols-1 lg:grid-cols-3 overflow-hidden shadow-2xl max-w-6xl mx-auto border border-slate-200 relative bg-white rounded-sm">
           
           {/* Info Card */}
-          <div className="lg:col-span-1 bg-[#0f172a] p-10 flex flex-col justify-center relative z-20 overflow-hidden">
+          <div className="lg:col-span-1 bg-slate-50 p-10 flex flex-col justify-center relative z-20 overflow-hidden border-r border-slate-100">
             {/* Background Image with Overlay */}
             <div 
-              className="absolute inset-0 z-0 opacity-40 bg-cover bg-center"
-              style={{ backgroundImage: `url('https://app-ei-live.ams3.cdn.digitaloceanspaces.com/property/images/2021/05/d2663a1f2aab19912a461cc60479e82d.jpg')` }}
+              className="absolute inset-0 z-0 opacity-20 bg-cover bg-center"
+              style={{ backgroundImage: `url('${venue.backgroundImage}')` }}
             ></div>
-            <div className="absolute inset-0 bg-[#0f172a]/80 z-1"></div>
-
-            {/* Sharp Arrow Notch */}
-            <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-0 h-0 border-t-[15px] border-t-transparent border-b-[15px] border-b-transparent border-l-[15px] border-l-[#0f172a] z-30"></div>
-
+            <div className="absolute inset-0 bg-slate-950/80 z-1"></div>
+ 
             <div className="relative z-10 space-y-12">
                 <div className="space-y-4">
-                    <h3 className="text-xl font-bold text-white uppercase tracking-wider">Location</h3>
-                    <p className="text-slate-200 text-lg leading-relaxed">
-                        Civic Centre, <br />
-                        Victoria Island, <br />
-                        Lagos, Nigeria
+                    <h3 className="text-[10px] font-black text-[var(--brand-gold)] uppercase tracking-[0.3em]">Location</h3>
+                    <p className="text-slate-900 text-xl font-black uppercase tracking-tighter leading-tight">
+                        {venue.name}, <br />
+                        {venue.address}
                     </p>
                 </div>
-
+ 
                 <div className="space-y-4">
-                    <h3 className="text-xl font-bold text-white uppercase tracking-wider">Address</h3>
+                    <h3 className="text-[10px] font-black text-[var(--brand-gold)] uppercase tracking-[0.3em]">Direct Access</h3>
                     <div className="flex items-center space-x-2">
-                        <MapPin className="text-primary" size={18} />
-                        <a href="https://maps.app.goo.gl/BX9s9s8s8s8s8s8s8" target="_blank" className="text-white font-bold text-lg hover:text-primary transition-colors flex items-center group">
-                            Get Directions...
-                            <Navigation className="ml-2 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        <MapPin className="text-[var(--brand-gold)]" size={14} />
+                        <a 
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue.name + ' ' + venue.address)}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-slate-900 font-black text-sm hover:text-[var(--brand-gold)] transition-colors flex items-center group uppercase tracking-widest"
+                        >
+                            Get Directions
+                            <Navigation className="ml-2 h-3 w-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </a>
                     </div>
                 </div>
@@ -55,9 +96,9 @@ export default function Venue() {
           </div>
           
           {/* Map Container */}
-          <div className="lg:col-span-2 h-[500px] lg:min-h-[500px] bg-slate-200 relative z-10 transition-all duration-700">
+          <div className="lg:col-span-2 h-[500px] lg:min-h-[500px] bg-slate-100 relative z-10 transition-all duration-700">
             <iframe 
-               src="https://maps.google.com/maps?q=The+Civic+Centre,+Victoria+Island,+Lagos&t=&z=15&ie=UTF8&iwloc=&output=embed"
+               src={venue.mapEmbedUrl}
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
@@ -66,7 +107,7 @@ export default function Venue() {
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </div>
-        </div>
+        </FadeIn>
       </div>
     </section>
   );

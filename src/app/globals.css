@@ -1,64 +1,65 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
 
 @layer base {
   :root {
     --background: 210 40% 98%; /* Light Slate */
     --foreground: 222 47% 11%; /* Deep Blue Text */
-    
+
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
- 
+
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
- 
+
     --primary: 45 63% 52%; /* Gold */
     --primary-foreground: 222 47% 11%;
- 
+
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222 47% 11%;
- 
+
     --muted: 210 40% 96.1%;
     --muted-foreground: 215 16% 47%;
- 
+
     --accent: 210 40% 96.1%;
     --accent-foreground: 222 47% 11%;
- 
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
- 
+
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 45 63% 52%;
-    
+
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
- 
+
     --card: 217 33% 17%;
     --card-foreground: 210 40% 98%;
- 
+
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
- 
+
     --primary: 45 63% 52%;
     --primary-foreground: 222 47% 11%;
- 
+
     --secondary: 217 33% 17%;
     --secondary-foreground: 210 40% 98%;
- 
+
     --muted: 217 33% 17%;
     --muted-foreground: 215 20.2% 65.1%;
- 
+
     --accent: 217 33% 17%;
     --accent-foreground: 210 40% 98%;
- 
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
- 
+
     --border: 217 33% 17%;
     --input: 217 33% 17%;
     --ring: 45 63% 52%;
@@ -77,22 +78,34 @@
   }
 }
 
-/* Sovereign Design Tokens - Deep Blue & Gold */
+/* Africa GRC 1.0 Brand Identity */
 :root {
-  --primary-summit: #0f172a; /* Deep Royal Blue */
-  --secondary-summit: #1e293b; /* Slate Blue */
-  --accent-summit: #d4af37; /* Metallic Gold */
-  --glass: rgba(15, 23, 42, 0.7); /* Darker glass for contrast */
-  --glass-border: rgba(212, 175, 55, 0.2); /* Subtle Gold border */
+  --brand-navy: #031a36;     /* Deep Midnight Navy */
+  --brand-green: #b2c36f;    /* High-Trust Olive Green */
+  --brand-gold: #ffd07e;     /* Champagne Gold */
+  --brand-blue: #6dacca;     /* Strategic Sky Blue */
+
+  /* Thematic Variables */
+  --primary-summit: var(--brand-navy);
+  --secondary-summit: #05244a; /* Slate interpretation of brand navy */
+  --accent-summit: var(--brand-gold);
+  --glass: rgba(3, 26, 54, 0.7);
+  --glass-border: rgba(178, 195, 111, 0.2); /* Using brand green for borders */
   --glass-blur: blur(16px);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #d4af37 0%, #fcd34d 50%, #d4af37 100%);
+  background: linear-gradient(135deg, var(--brand-gold) 0%, #fff 50%, var(--brand-blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+  text-shadow: 0 2px 10px rgba(109, 172, 202, 0.2);
+}
+
+/* Strategic Mesh Background */
+.bg-mesh-network {
+  background-color: var(--brand-navy);
+  position: relative;
 }
 
 .glass {
@@ -103,29 +116,29 @@
 }
 
 .glass-card {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(3, 26, 54, 0.6);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(178, 195, 111, 0.1);
   border-radius: 1rem;
 }
 
 .glow-btn {
-  background: linear-gradient(135deg, #d4af37, #b4941f);
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--brand-gold), #e6bb70);
+  color: var(--brand-navy) !important;
   border: none;
-  border-radius: 8px;
-  font-weight: 700;
+  border-radius: 4px;
+  font-weight: 800;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 4px 20px rgba(255, 208, 126, 0.3);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
 }
 
 .glow-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(212, 175, 55, 0.5);
-  background: linear-gradient(135deg, #fcd34d, #d4af37);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 35px rgba(255, 208, 126, 0.5);
+  background: linear-gradient(135deg, #fff, var(--brand-gold));
 }
 
 /* Animations */
@@ -153,15 +166,15 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+
   section {
     padding-top: 4rem;
     padding-bottom: 4rem;
   }
-  
+
   h1 { font-size: 2.5rem !important; }
   h2 { font-size: 1.75rem !important; }
-  
+
   /* Fix hero video on mobile */
   video {
     object-position: center;
@@ -171,7 +184,7 @@
 @media (max-width: 480px) {
   h1 { font-size: 2rem !important; }
   h2 { font-size: 1.5rem !important; }
-  
+
   .container {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
@@ -181,6 +194,7 @@
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Height of the sticky navbar + cushion */
 }
 
 /* Ensure images don't overflow */
@@ -189,3 +203,28 @@ img {
   height: auto;
 }
 
+@theme inline {
+  --animate-aurora: aurora 8s ease-in-out infinite alternate;
+  @keyframes aurora {
+  0% {
+    background-position: 0% 50%;
+    transform: rotate(-5deg) scale(0.9);
+    }
+  25% {
+    background-position: 50% 100%;
+    transform: rotate(5deg) scale(1.1);
+    }
+  50% {
+    background-position: 100% 50%;
+    transform: rotate(-3deg) scale(0.95);
+    }
+  75% {
+    background-position: 50% 0%;
+    transform: rotate(3deg) scale(1.05);
+    }
+  100% {
+    background-position: 0% 50%;
+    transform: rotate(-5deg) scale(0.9);
+    }
+  }
+}

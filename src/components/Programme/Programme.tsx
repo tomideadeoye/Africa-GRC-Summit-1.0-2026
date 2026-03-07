@@ -1,158 +1,245 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Clock, Users, Shield, Zap, Target, Award } from "lucide-react";
+import { FadeIn, StaggerContainer, StaggerItem } from "../ui/FadeIn";
 
-const scheduleData = [
-  {
-    day: "Day 1",
-    date: "Thursday, 27th November 2025",
-    sessions: [
-        { time: "07:30 - 09:00", title: "Registration / Breakfast / Networking", type: "break" },
-        { time: "09:00 - 09:05", title: "Welcome Address", speaker: "Chief Bolaji Ayorinde, OFR, SAN, FCArb" },
-        { time: "09:05 - 09:10", title: "Opening Remarks", speaker: "Professor Fabian Ajogwu, OFR, SAN, FCArb" },
-        { time: "09:50 - 10:00", title: "Keynote Address: UNCITRAL Perspective", speaker: "Anna Joubin-Bret (Secretary General, UNCITRAL)" },
-        { time: "10:00 - 10:15", title: "Keynote Address: Transformation of Justice Sector", speaker: "Chief Lateef Olasunkanmi Fagbemi SAN (Attorney General of the Federation)" },
-        { time: "10:30 - 12:00", title: "Plenary 1: Strengthening Institutional Arbitration and ADR in Africa", panelists: ["Hon. Justice Aisha Mohammed Usman", "Prof. Bankole Sodipo, SAN", "James Clanchy"], moderator: "Prof. Ike Ehiribe", type: "plenary" },
-        { time: "12:00 - 13:30", title: "Plenary 2: Disputes in Energy, Oil & Gas Sectors", panelists: ["Prof. Yinka Omorogbe, SAN", "Engr. Dr. Felicia Agubata", "Dr. Joseph Tolorunse"], moderator: "Dr. Erimma Gloria Orie", type: "plenary" },
-        { time: "14:30 - 16:00", title: "Plenary 3: Construction & Infrastructure Disputes", panelists: ["Ahmed Abdel Hakam", "Kola Awodein, SAN", "Virginie Colaiuta"], moderator: "Winnifred Olanipekun", type: "plenary" },
-        { time: "16:00 - 17:30", title: "Plenary 4: Banking, Finance & Fintech Disputes", panelists: ["Nosakhare Aguebor (AFC)", "Adekunle Olaofe (Flutterwave)", "Jackwell Feris"], moderator: "Taiwo Ogbara", type: "plenary" },
-        { time: "17:30 - 19:30", title: "Welcome Reception", type: "social" }
-    ]
-  },
-  {
-    day: "Day 2",
-    date: "Friday, 28th November 2025",
-    sessions: [
-        { time: "07:30 - 08:45", title: "Early Riser: Young NICArb Session", description: "The Role of Young Arbitrators in Promoting ADR Awareness", type: "workshop" },
-        { time: "09:00 - 09:15", title: "Keynote Address (African Series)", speaker: "Hon. Dorcas Orduor (Attorney-General, Kenya)" },
-        { time: "09:15 - 10:45", title: "Plenary 5: Institutional Mediation & Collaboration", panelists: ["Tat Lim (Chair, IMI)", "Cai Weiping", "Oladimeji Ojo (World Bank)"], moderator: "Prof. Steve Abayomi Bank-Ola", type: "plenary" },
-        { time: "10:45 - 12:15", title: "Plenary 6: Arbitration and the Courts", panelists: ["Hon. Justice Jumoke Pedro", "Hon. Justice François Xavier Mbono (OHADA)"], moderator: "Nze Atulomah", type: "plenary" },
-        { time: "12:15 - 13:45", title: "Plenary 7: Ethics in Domestic & International Arbitration", panelists: ["Hon. Justice Hadiza Shagari", "Remi Gerbay", "Jonathan Barnes"], moderator: "Dr. Jude Theedeus Nnodum", type: "plenary" },
-        { time: "15:00 - 16:00", title: "Annual General Meeting", type: "business" }
-    ]
-  }
-];
+interface Session {
+  id?: string;
+  time: string;
+  title: string;
+  topic?: string;
+  speaker?: string;
+  role?: string;
+  type?: "plenary" | "break" | "keynote" | "social" | "forum" | "case-study" | "workshop";
+  keyFocus?: string[];
+  caseCoverage?: string[];
+  description?: string;
+}
+
+interface AgendaDay {
+  id: string;
+  day: number | string;
+  date: string;
+  theme: string;
+  sessions: Session[];
+}
 
 export default function Programme() {
-  const [activeDay, setActiveDay] = useState(0);
+  const [activeDayIdx, setActiveDayIdx] = useState(0);
+  const [agenda, setAgenda] = useState<AgendaDay[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAgenda = async () => {
+      try {
+        const res = await fetch('/api/admin/config');
+        const data = await res.json();
+        if (data.agenda) {
+          setAgenda(data.agenda);
+        }
+      } catch (error) {
+        console.error('Error fetching agenda:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAgenda();
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="programme" className="py-24 bg-[#020617] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-gold/20 border-t-gold rounded-full animate-spin" />
+          <p className="text-gold font-black uppercase tracking-widest text-sm">Synchronizing Intelligence...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (agenda.length === 0) return null;
+
+  const currentDay = agenda[activeDayIdx];
 
   return (
-    <section id="programme" className="py-24 bg-white dark:bg-[#0f172a] relative overflow-hidden transition-colors duration-300">
-       {/* Watermark Background */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full select-none pointer-events-none overflow-hidden flex justify-center items-center opacity-[0.03] dark:opacity-[0.05]">
-        <span className="text-[15vw] font-black text-foreground dark:text-white leading-none whitespace-nowrap">
-          agena
+    <section id="programme" className="py-32 bg-slate-50 relative overflow-hidden border-t border-slate-100">
+      {/* Watermark */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full select-none pointer-events-none opacity-[0.03] flex justify-center">
+        <span className="text-[20vw] font-black text-slate-900 leading-none uppercase tracking-tighter">
+          AGENDA
         </span>
       </div>
-      {/* Correction: The reference says "agenda" but looks like "agenda" in watermark. I will use 'agenda'. */}
-      <div className="absolute top-24 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full select-none pointer-events-none flex justify-center opacity-[0.04]">
-         <span className="text-[12rem] md:text-[16rem] font-black text-slate-900 dark:text-white leading-none tracking-tighter">
-            agenda
-         </span>
-      </div>
 
-      <div className="container px-6 max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-16 animate-fade-in-up">
-           <span className="text-primary font-bold tracking-widest text-sm uppercase mb-3 block">#AfricaGRCSummit2026</span>
-           <h2 className="text-4xl md:text-6xl font-extrabold mb-6 text-foreground dark:text-white tracking-tight">
-            Preliminary Agenda 2026
+      <div className="container px-6 max-w-7xl mx-auto relative z-10">
+        <FadeIn className="text-center mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--brand-gold)]/10 border border-[var(--brand-gold)]/20 mb-6">
+            <Shield className="w-4 h-4 text-[var(--brand-gold)]" />
+            <span className="text-[var(--brand-gold)] text-xs font-bold tracking-[0.2em] uppercase">Executive Curriculum</span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black mb-6 text-slate-900 tracking-tight">
+            Summit <span className="text-[var(--brand-gold)]">Programme</span>
           </h2>
-          <p className="text-xl md:text-2xl font-bold text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-            Reimagining Integrated GRC, Strategy, and Performance
+          <p className="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+            A high-level strategic roadmap designed for the architects of Africa&apos;s financial future.
           </p>
-          <p className="mt-6 text-muted-foreground dark:text-slate-400 max-w-4xl mx-auto text-lg leading-relaxed">
-            Africa GRC Summit 2026 will enable attendees to reimagine integrated GRC, strategy and Performance ideas not just listening but engaging, interacting and addressing today&apos;s challenges.
-          </p>
-        </div>
+        </FadeIn>
 
-        {/* Day Toggles - Rectangular Style */}
-        <div className="flex justify-center mb-0">
-            {scheduleData.map((day, idx) => (
-                <button
-                    key={idx}
-                    onClick={() => setActiveDay(idx)}
-                    className={`px-8 md:px-12 py-4 md:py-5 text-lg md:text-xl font-bold transition-all duration-300 border-2 ${
-                        activeDay === idx 
-                        ? "bg-[#0f172a] text-white border-[#0f172a] shadow-lg dark:bg-white dark:text-[#0f172a] dark:border-white" 
-                        : "bg-white text-[#0f172a] border-[#0f172a] hover:bg-slate-50 dark:bg-[#0f172a] dark:text-white dark:border-white/20 dark:hover:bg-white/5"
-                    }`}
-                >
-                    {day.day} Conference
-                </button>
-            ))}
-        </div>
+        {/* Day selection tabs */}
+        <StaggerContainer className="flex flex-col md:flex-row justify-center mb-16 gap-4">
+          {agenda.map((day, idx) => (
+            <StaggerItem key={idx} className="flex-1">
+              <button
+                onClick={() => setActiveDayIdx(idx)}
+                className={`w-full group relative overflow-hidden px-10 py-6 transition-all duration-500 border-2 ${
+                  activeDayIdx === idx
+                    ? "border-[var(--brand-gold)] bg-white text-slate-900 shadow-lg"
+                    : "border-slate-100 bg-transparent text-slate-400 hover:border-slate-200 hover:text-slate-600"
+                }`}
+              >
+                <div className="relative z-10 flex flex-col items-center">
+                  <span className={`text-[10px] font-black tracking-[0.3em] uppercase mb-1 ${activeDayIdx === idx ? "text-[var(--brand-gold)]" : "text-slate-300"}`}>
+                    Day {day.day}
+                  </span>
+                  <span className="text-xl font-black tracking-tight uppercase">
+                    {day.date}
+                  </span>
+                </div>
+                {/* Active indicator bar */}
+                <div 
+                  className={`absolute bottom-0 left-0 h-1 bg-[var(--brand-gold)] transition-all duration-700 ${
+                    activeDayIdx === idx ? "w-full" : "w-0"
+                  }`} 
+                />
+              </button>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
 
-        {/* Agenda Table Layout */}
-        <div className="bg-white dark:bg-transparent border-x border-b border-slate-200 dark:border-slate-800 shadow-sm">
-            {/* Header for Day Content if needed, but tabs act as header. */}
-             
-            <div className="divide-y divide-slate-200 dark:divide-slate-800">
-                {scheduleData[activeDay].sessions.map((session, sIdx) => (
-                  <div 
-                    key={sIdx} 
-                    className={`flex flex-col md:flex-row p-6 md:p-8 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors ${
-                        session.type === 'break' ? 'bg-slate-50/80 dark:bg-white/5' : ''
-                    }`}
-                  >
-                        {/* Time Column */}
-                        <div className="w-full md:w-64 flex-shrink-0 mb-4 md:mb-0">
-                            <div className="flex items-center text-[#0f172a] dark:text-white font-bold text-xl md:text-2xl font-mono tracking-tighter">
-                                {session.time}
-                            </div>
-                        </div>
+        {/* Current Day Theme Header */}
+        <FadeIn className="mb-12 text-center" key={activeDayIdx}>
+          <p className="text-[var(--brand-gold)] font-bold tracking-widest text-sm uppercase mb-2">Subject Context</p>
+          <h3 className="text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-wider">{currentDay.theme}</h3>
+          <div className="w-24 h-1 bg-[var(--brand-gold)] mx-auto mt-6" />
+        </FadeIn>
 
-                        {/* Content Column */}
-                        <div className="flex-1">
-                            <h4 className="text-xl md:text-2xl font-extrabold text-[#0f172a] dark:text-white mb-3 leading-snug">
-                                {session.title}
-                            </h4>
-                            
-                            {session.description && (
-                                <p className="text-slate-600 dark:text-slate-400 mb-4 text-base italic">
-                                    {session.description}
-                                </p>
-                            )}
+        {/* Agenda Content */}
+        <StaggerContainer className="space-y-4">
+          {currentDay.sessions.map((session, sIdx) => (
+            <StaggerItem
+              key={sIdx}
+              className={`group flex flex-col md:flex-row transition-all duration-300 border border-slate-200 ${
+                session.type === "break" 
+                ? "bg-slate-100/50 border-transparent opacity-60" 
+                : "bg-white hover:border-[var(--brand-gold)]/30 hover:shadow-xl"
+              }`}
+            >
+              {/* Time Section */}
+              <div className="w-full md:w-56 p-6 flex-shrink-0 border-b md:border-b-0 md:border-r border-slate-100 flex flex-col justify-center gap-2">
+                <div className="flex items-center gap-2 text-slate-400">
+                  <Clock size={16} />
+                  <span className="text-[10px] font-black tracking-widest uppercase">Time Slot</span>
+                </div>
+                <div className="text-xl md:text-2xl font-black text-slate-900 tracking-tighter">
+                  {session.time}
+                </div>
+              </div>
 
-                            {(session.speaker || session.moderator || session.panelists) && (
-                                <div className="space-y-3 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-                                    {session.speaker && (
-                                        <div className="flex flex-col sm:flex-row sm:items-start gap-2 text-base">
-                                            <span className="font-bold text-primary uppercase text-sm tracking-wider w-24 flex-shrink-0 pt-1">Speaker</span>
-                                            <span className="text-slate-700 dark:text-slate-300 font-medium">{session.speaker}</span>
-                                        </div>
-                                    )}
-                                    {session.moderator && (
-                                        <div className="flex flex-col sm:flex-row sm:items-start gap-2 text-base">
-                                            <span className="font-bold text-primary uppercase text-sm tracking-wider w-24 flex-shrink-0 pt-1">Moderator</span>
-                                            <span className="text-slate-700 dark:text-slate-300 font-medium">{session.moderator}</span>
-                                        </div>
-                                    )}
-                                    {session.panelists && (
-                                        <div className="flex flex-col sm:flex-row sm:items-start gap-2 text-base">
-                                            <span className="font-bold text-primary uppercase text-sm tracking-wider w-24 flex-shrink-0 pt-1">Panelists</span>
-                                            <div className="flex flex-wrap gap-2">
-                                                {session.panelists.map((p, i) => (
-                                                    <span key={i} className="text-slate-700 dark:text-slate-300 font-medium">
-                                                        {p}{i < session.panelists!.length - 1 ? "," : ""}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
+              {/* Content Section */}
+              <div className="flex-1 p-6 md:p-8">
+                <div className="flex flex-wrap items-center gap-3 mb-3">
+                  {session.type && (
+                    <span className={`px-2 py-0.5 text-[10px] font-black uppercase tracking-widest border border-current rounded-sm ${
+                      ['keynote', 'plenary'].includes(session.type) ? 'text-[var(--brand-gold)]' : 
+                      session.type === 'forum' ? 'text-blue-600' :
+                      ['case-study', 'workshop'].includes(session.type) ? 'text-emerald-600' :
+                      'text-slate-400'
+                    }`}>
+                      {session.type.replace('-', ' ')}
+                    </span>
+                  )}
+                  {session.role && (
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{session.role}</span>
+                  )}
+                </div>
 
-                             {session.type === 'plenary' && (
-                                <div className="mt-4">
-                                    <span className="inline-flex items-center text-xs font-bold text-primary uppercase tracking-widest border border-primary/30 px-3 py-1 rounded-sm">
-                                        Plenary Session
-                                    </span>
-                                </div>
-                             )}
-                        </div>
+                <h4 className={`text-xl md:text-2xl font-black mb-2 tracking-tight ${session.type === "break" ? 'text-slate-400' : 'text-slate-900'}`}>
+                  {session.title}
+                </h4>
+
+                {session.topic && (
+                  <div className="text-[var(--brand-gold)] font-bold text-lg md:text-xl italic mb-4 leading-relaxed line-clamp-2">
+                    &quot;{session.topic}&quot;
                   </div>
-                ))}
-            </div>
+                )}
+
+                {session.speaker && (
+                  <div className="flex items-center gap-3 mt-4 mb-4">
+                    <div className="w-8 h-8 rounded-full bg-slate-50 border border-[var(--brand-gold)]/20 flex items-center justify-center">
+                      <Users size={14} className="text-[var(--brand-gold)]" />
+                    </div>
+                    <div>
+                      <p className="text-[8px] text-slate-400 font-bold uppercase tracking-widest">Presenter</p>
+                      <p className="text-slate-900 font-black text-sm uppercase">{session.speaker}</p>
+                    </div>
+                  </div>
+                )}
+
+                {session.description && (
+                  <p className="text-slate-500 text-sm font-medium italic leading-relaxed">
+                    {session.description}
+                  </p>
+                )}
+
+                {/* Key Focus Points */}
+                {session.keyFocus && session.keyFocus.length > 0 && (
+                  <div className="mt-6 pt-6 border-t border-slate-100">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Target className="w-4 h-4 text-[var(--brand-gold)]" />
+                      <p className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Core Insights Matrix</p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {session.keyFocus.map((focus, fIdx) => (
+                        <div key={fIdx} className="flex items-start gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-[var(--brand-gold)] mt-1.5 flex-shrink-0" />
+                          <span className="text-xs text-slate-500 leading-snug font-medium">{focus}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Case Coverage */}
+                {session.caseCoverage && session.caseCoverage.length > 0 && (
+                  <div className="mt-6 pt-6 border-t border-slate-100">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Zap className="w-4 h-4 text-emerald-600" />
+                      <p className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Case Implementation Pillars</p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {session.caseCoverage.map((item, cIdx) => (
+                        <div key={cIdx} className="flex items-start gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-1.5 flex-shrink-0" />
+                          <span className="text-xs text-slate-500 leading-snug font-medium">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              
+              {/* Optional Right Decorative Accent */}
+              {session.type !== "break" && (
+                <div className="hidden md:flex w-2 bg-gradient-to-b from-transparent via-[var(--brand-gold)]/20 to-transparent group-hover:via-[var(--brand-gold)]/50 transition-all duration-300" />
+              )}
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+
+        {/* Final CTA in Programme */}
+        <div className="mt-20 text-center">
+            <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest italic mb-4">Curriculum and speakers subject to strategic refinement.</p>
+            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-slate-100 to-transparent" />
         </div>
       </div>
     </section>

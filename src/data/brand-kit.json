@@ -1,0 +1,29 @@
+{
+    "project": "Africa GRC Summit 1.0 (2026)",
+    "colors": {
+        "midnightNavy": {
+            "hex": "#031a36",
+            "usage": "Primary Background, Dark Text"
+        },
+        "oliveGreen": {
+            "hex": "#b2c36f",
+            "usage": "Secondary Accents, Success States, Borders"
+        },
+        "champagneGold": {
+            "hex": "#ffd07e",
+            "usage": "Primary Accents, CTAs, Highlights"
+        },
+        "strategicBlue": {
+            "hex": "#6dacca",
+            "usage": "Subtle Accents, Gradients, Links"
+        }
+    },
+    "assets": {
+        "logo": "/branding/logo-main.png",
+        "backgroundMesh": "CSS Class: .bg-mesh-network"
+    },
+    "typography": {
+        "headings": "Inter / System Sans-Serif (Black)",
+        "body": "Inter / System Sans-Serif"
+    }
+}
