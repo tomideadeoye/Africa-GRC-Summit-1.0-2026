@@ -21,22 +21,23 @@ interface SpeakerModalProps {
 
 function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
   return (
-    <div className="fixed inset-0 z-50 flex items-start md:items-center justify-center p-0 md:p-6 bg-black/95 backdrop-blur-sm overflow-y-auto" onClick={onClose}>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-black/90 backdrop-blur-sm" onClick={onClose}>
+      {/* Close Button - Outside the modal box so it's always accessible */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 md:top-6 md:right-6 z-[110] p-3 md:p-2 bg-white/10 hover:bg-[var(--brand-gold)] hover:text-navy rounded-full transition-all duration-300 border border-white/20 shadow-xl"
+      >
+        <X size={24} className="text-white" />
+      </button>
+
+      {/* Modal Box */}
       <div 
-        className="relative w-full max-w-4xl bg-[var(--brand-navy)] md:border md:border-white/10 md:rounded-sm shadow-2xl min-h-screen md:min-h-0 my-0 md:my-auto"
+        className="relative w-full max-w-4xl max-h-[85vh] bg-[var(--brand-navy)] border border-white/10 rounded-xl overflow-y-auto shadow-2xl flex flex-col md:block"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button - Fixed on mobile to stay visible during scroll */}
-        <button
-          onClick={onClose}
-          className="fixed md:absolute top-4 right-4 z-[60] p-3 md:p-2 bg-black/60 md:bg-white/5 hover:bg-[var(--brand-gold)] hover:text-navy rounded-full transition-all duration-300 border border-white/20"
-        >
-          <X size={24} className="text-white group-hover:text-navy" />
-        </button>
-
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Left: Image */}
-          <div className="relative aspect-[4/5] md:aspect-auto">
+          {/* Left: Image Container - Fixed height on mobile to prevent content push */}
+          <div className="relative h-[45vh] md:h-auto md:aspect-auto shrink-0">
             {speaker.image ? (
               <img
                 src={speaker.image}
@@ -48,7 +49,8 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
                 <User size={120} className="text-slate-800" />
               </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-navy)] via-transparent to-transparent md:bg-gradient-to-r" />
+            {/* Visual separation for text overlay on mobile */}
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[var(--brand-navy)] to-transparent" />
           </div>
 
           {/* Right: Content */}
