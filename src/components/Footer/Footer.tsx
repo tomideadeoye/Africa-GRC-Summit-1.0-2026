@@ -1,9 +1,19 @@
 import { Linkedin, Twitter, Instagram, Mail, ArrowUpRight } from "lucide-react";
+import { InteractiveGridPattern } from "../ui/interactive-grid-pattern";
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--brand-navy)] border-t border-white/5 pt-20 pb-10 transition-all duration-300">
-      <div className="container px-6 mx-auto">
+    <footer className="bg-[var(--brand-navy)] border-t border-white/5 pt-20 pb-10 transition-all duration-300 relative overflow-hidden">
+      {/* Subtle Digital Infrastructure Background */}
+      <div className="absolute inset-0 z-0 opacity-10 pointer-events-none overflow-hidden">
+        <InteractiveGridPattern 
+          width={60} 
+          height={60} 
+          squares={[40, 40]}
+          className="[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]"
+        />
+      </div>
+      <div className="container px-6 mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           
           {/* Brand Column */}
@@ -60,14 +70,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
-          <p>&copy; 2026 Africa GRC Summit. All Rights Reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-[var(--brand-gold)] transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-[var(--brand-gold)] transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-[var(--brand-gold)] transition-colors">Code of Conduct</a>
-          </div>
+        {/* Bottom Bar - Centralized Branding */}
+        <div className="pt-12 border-t border-white/5 flex flex-col items-center justify-center text-center">
+          <p className="text-[10px] sm:text-xs font-black text-white/30 tracking-[0.3em] uppercase">
+            &copy; 2026 Africa GRC Summit. All Rights Reserved.
+          </p>
         </div>
       </div>
     </footer>

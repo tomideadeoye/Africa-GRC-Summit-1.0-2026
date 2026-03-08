@@ -29,15 +29,15 @@ export default function Hero({ initialData }: HeroProps) {
       <div className="absolute inset-0 z-0 overflow-hidden">
         {/* Interactive Grid Background */}
         <InteractiveGridPattern 
-          className="absolute inset-0 h-full w-full opacity-40 [mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]" 
-          width={60} 
-          height={60} 
-          squares={[40, 40]}
+          className="absolute inset-0 h-full w-full opacity-60 [mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]" 
+          width={24} 
+          height={24} 
+          squares={[100, 100]}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--brand-navy)] via-transparent to-[var(--brand-navy)] opacity-60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--brand-navy)] via-transparent to-[var(--brand-navy)] opacity-40 pointer-events-none" />
       </div>
 
-      <div className="flex-1 flex flex-col justify-center container px-5 md:px-6 mx-auto relative z-10 py-20 md:py-24">
+      <div className="flex-1 flex flex-col justify-center container px-5 md:px-6 mx-auto relative z-10 py-20 md:py-24 pointer-events-none h-full">
         <StaggerContainer className="flex flex-col items-center md:items-start text-center md:text-left max-w-5xl w-full">
 
           {/* Unified Identity Component */}
@@ -59,14 +59,14 @@ export default function Hero({ initialData }: HeroProps) {
                   {hero.title.split(' ')[0]}
                 </span>
                 
-                <div className="flex items-end justify-center md:justify-start gap-2 sm:gap-3 md:gap-5 mt-2">
+                <div className="flex items-end justify-center md:justify-start gap-1 sm:gap-2 md:gap-5 mt-2">
                   <AuroraText 
-                    className="text-[clamp(2.5rem,13vw,4.4rem)] md:text-7xl lg:text-8xl font-black tracking-tighter block uppercase py-1 md:py-2 whitespace-nowrap"
+                    className="text-[clamp(2rem,11vw,4rem)] md:text-7xl lg:text-8xl font-black tracking-tighter block uppercase py-1 md:py-2 whitespace-nowrap"
                     colors={["#ffd07e", "#ffffff", "#6dacca", "#ffd07e"]}
                   >
                     GRC SUMMIT
                   </AuroraText>
-                  <span className="text-[clamp(1.9rem,9vw,3.1rem)] md:text-5xl lg:text-6xl opacity-30 font-light italic tracking-[0.12em] md:tracking-[0.2em] text-white pb-1 md:pb-2 whitespace-nowrap">1.0</span>
+                  <span className="text-[clamp(1.2rem,8vw,2.5rem)] md:text-5xl lg:text-6xl opacity-30 font-light italic tracking-[0.12em] md:tracking-[0.2em] text-white pb-1 md:pb-2 whitespace-nowrap">1.0</span>
                 </div>
 
        
@@ -77,29 +77,29 @@ export default function Hero({ initialData }: HeroProps) {
           </StaggerItem>
 
          {/* Subtitle */}
-                <h2 className="text-[var(--brand-gold)] text-base sm:text-lg md:text-2xl font-bold tracking-[0.12em] md:tracking-widest max-w-[24ch] md:max-w-3xl leading-tight border-l-4 border-[var(--brand-gold)] pl-5 md:pl-6 mt-3 md:mt-4">
+                <h2 className="text-[var(--brand-gold)] text-[clamp(1rem,4.5vw,1.25rem)] md:text-2xl font-bold tracking-[0.15em] md:tracking-widest max-w-[28ch] md:max-w-3xl leading-[1.4] border-l-4 border-[var(--brand-gold)] pl-5 md:pl-6 mt-4 md:mt-4 uppercase">
                   {hero.subtitle}
                 </h2>
 
 
           {/* Metadata Block */}
-          <StaggerItem className="w-full mt-7 md:mt-8">
-            <div className="flex flex-col md:flex-row items-stretch justify-start gap-1 p-1 bg-white/5 border border-white/10 max-w-3xl">
-              <div className="flex-1 p-4 sm:p-5 md:p-7 flex items-center space-x-4 md:space-x-5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
-                <div className="p-2.5 md:p-3 bg-[var(--brand-gold)]/10 rounded-sm">
-                  <Calendar className="text-[var(--brand-gold)] w-5 h-5 md:w-6 md:h-6" />
+          <StaggerItem className="w-full mt-7 md:mt-8 pointer-events-auto">
+            <div className="flex flex-col md:flex-row items-stretch justify-start gap-0.5 p-0.5 bg-white/5 border border-white/10 max-w-3xl">
+              <div className="flex-1 p-3 sm:p-5 md:p-7 flex items-center space-x-3 md:space-x-5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+                <div className="p-2 md:p-3 bg-[var(--brand-gold)]/10 rounded-sm">
+                  <Calendar className="text-[var(--brand-gold)] w-4 h-4 md:w-6 md:h-6" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-white font-black tracking-[0.08em] md:tracking-[0.12em] text-xs md:text-sm leading-tight">{hero.dates}</span>
+                  <span className="text-white font-black tracking-[0.05em] md:tracking-[0.12em] text-[10px] md:text-sm leading-tight uppercase">{hero.dates}</span>
                 </div>
               </div>
               <div className="hidden md:block w-px bg-white/10" />
-              <div className="flex-1 p-4 sm:p-5 md:p-7 flex items-center space-x-4 md:space-x-5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
-                <div className="p-2.5 md:p-3 bg-[var(--brand-gold)]/10 rounded-sm">
-                  <MapPin className="text-[var(--brand-gold)] w-5 h-5 md:w-6 md:h-6" />
+              <div className="flex-1 p-3 sm:p-5 md:p-7 flex items-center space-x-3 md:space-x-5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+                <div className="p-2 md:p-3 bg-[var(--brand-gold)]/10 rounded-sm">
+                  <MapPin className="text-[var(--brand-gold)] w-4 h-4 md:w-6 md:h-6" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-white font-black tracking-[0.08em] md:tracking-[0.12em] text-xs md:text-sm leading-tight">{hero.venue}</span>
+                  <span className="text-white font-black tracking-[0.05em] md:tracking-[0.12em] text-[10px] md:text-sm leading-tight uppercase">{hero.venue}</span>
                 </div>
               </div>
             </div>

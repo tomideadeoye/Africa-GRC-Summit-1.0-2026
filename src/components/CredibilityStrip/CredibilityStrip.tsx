@@ -80,8 +80,8 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
                 <User size={120} className="text-slate-800" />
               </div>
             )}
-            {/* Visual separation for text overlay on mobile */}
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[var(--brand-navy)] to-transparent" />
+            {/* Visual separation for text overlay on mobile - Overlaps seam by 1px to prevent artifacts */}
+            <div className="absolute inset-x-0 -bottom-px h-32 bg-gradient-to-t from-[var(--brand-navy)] via-[var(--brand-navy)]/80 to-transparent" />
           </div>
 
           {/* Right: Content */}

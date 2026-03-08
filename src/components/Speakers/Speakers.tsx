@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Users, Linkedin, ExternalLink, ShieldCheck, X } from "lucide-react";
+import { User, Users, Linkedin, ExternalLink, ShieldCheck, X, ArrowRight } from "lucide-react";
 import { AuroraText } from "../ui/aurora-text";
+import { InteractiveGridPattern } from "../ui/interactive-grid-pattern";
 
 interface Speaker {
   id: string;
@@ -80,8 +81,8 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
                 <User size={120} className="text-slate-800" />
               </div>
             )}
-            {/* Visual separation for text overlay on mobile */}
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[var(--brand-navy)] to-transparent" />
+            {/* Visual separation for text overlay on mobile - Overlaps seam by 1px to prevent artifacts */}
+            <div className="absolute inset-x-0 -bottom-px h-32 bg-gradient-to-t from-[var(--brand-navy)] via-[var(--brand-navy)]/80 to-transparent" />
           </div>
 
           {/* Right: Content */}
@@ -175,6 +176,16 @@ export default function Speakers() {
 
   return (
     <section id="speakers" className="py-32 bg-[var(--brand-navy)] relative overflow-hidden">
+      {/* Subtle Digital Infrastructure Background */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
+        <InteractiveGridPattern 
+          width={48} 
+          height={48} 
+          squares={[60, 60]}
+          className="[mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]"
+        />
+      </div>
+
       {/* Background Watermark */}
       <div className="absolute top-20 left-1/2 -translate-x-1/2 select-none pointer-events-none z-0 opacity-[0.03]">
          <span className="text-[15vw] font-black text-white tracking-tighter uppercase">
