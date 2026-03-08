@@ -56,7 +56,7 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
             {/* Badge */}
             <div className="flex items-center gap-2 mb-6">
               <ShieldCheck size={16} className="text-[var(--brand-gold)]" />
-              <span className="text-[10px] font-black text-[var(--brand-gold)] uppercase tracking-[0.3em]">
+              <span className="text-[10px] font-black text-[var(--brand-gold)] tracking-[0.3em]">
                 Global Faculty
               </span>
             </div>
@@ -68,10 +68,10 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
 
             {/* Title & Company */}
             <div className="mb-8">
-              <p className="text-lg font-black text-[var(--brand-gold)] uppercase tracking-tight mb-1">
+              <p className="text-lg font-black text-[var(--brand-gold)] tracking-tight mb-1">
                 {speaker.title}
               </p>
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-wider">
+              <p className="text-sm font-bold text-slate-400 tracking-wider">
                 {speaker.company}
               </p>
             </div>
@@ -79,7 +79,7 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
             {/* Bio */}
             {speaker.bio && (
               <div className="mb-8">
-                <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">
+                <h3 className="text-[10px] font-black text-slate-500 tracking-[0.2em] mb-4">
                   Biography
                 </h3>
                 <p className="text-slate-300 leading-relaxed font-medium">
@@ -98,7 +98,7 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
                   className="flex items-center gap-3 text-slate-400 hover:text-[var(--brand-gold)] transition-colors group"
                 >
                   <Linkedin size={20} />
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] group-hover:text-[var(--brand-gold)]">
+                  <span className="text-[10px] font-black tracking-[0.2em] group-hover:text-[var(--brand-gold)]">
                     Connect on LinkedIn
                   </span>
                 </a>
@@ -149,7 +149,7 @@ export default function Speakers() {
         <div className="max-w-4xl mb-24 text-left">
            <div className="flex items-center gap-3 mb-6">
               <div className="h-px w-12 bg-[var(--brand-gold)]" />
-              <span className="text-[var(--brand-gold)] font-black tracking-[0.4em] text-[10px] uppercase">
+              <span className="text-[var(--brand-gold)] font-black tracking-[0.4em] text-[10px]">
                 Distinguished Leadership
               </span>
            </div>
@@ -157,10 +157,10 @@ export default function Speakers() {
              The Architects of <br />
              <AuroraText colors={["#ffd07e", "#ffffff", "#6dacca", "#ffd07e"]}>Governance</AuroraText>
            </h2>
-           <p className="text-slate-400 text-lg font-medium leading-relaxed uppercase tracking-widest max-w-2xl">
+           <p className="text-slate-400 text-lg font-medium leading-relaxed tracking-widest max-w-2xl">
              Africa GRC Summit 1.0 features respected global and African leaders shaping governance, regulatory oversight and digital resilience.
            </p>
-           <p className="text-[#d4af37] text-sm font-bold mt-4 uppercase tracking-[0.2em] italic">
+           <p className="text-[#d4af37] text-sm font-bold mt-4 tracking-[0.2em] italic">
              Additional executive speakers and regulatory leaders will be announced.
            </p>
         </div>
@@ -204,10 +204,10 @@ export default function Speakers() {
                     {speaker.name}
                   </h3>
                   <div className="flex flex-col">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1 leading-tight">
+                    <span className="text-[10px] font-black text-slate-500 tracking-widest mb-1 leading-tight">
                       {speaker.title}
                     </span>
-                    <span className="text-xs font-bold text-[var(--brand-gold)] uppercase tracking-tight opacity-70">
+                    <span className="text-xs font-bold text-[var(--brand-gold)] tracking-tight opacity-70">
                       {speaker.company}
                     </span>
                   </div>
@@ -225,7 +225,7 @@ export default function Speakers() {
                        <Linkedin size={20} />
                      </a>
                    )}
-                   <button className="flex items-center gap-2 text-[10px] font-black text-[var(--brand-gold)] uppercase tracking-[0.2em] hover:gap-4 transition-all">
+                   <button className="flex items-center gap-2 text-[10px] font-black text-[var(--brand-gold)] tracking-[0.2em] hover:gap-4 transition-all">
                       View Profile <ExternalLink size={12} />
                    </button>
                 </div>
@@ -242,10 +242,10 @@ export default function Speakers() {
                 <Users size={40} className="text-slate-600 group-hover:text-[var(--brand-gold)]" />
              </div>
              <h3 className="text-2xl font-black text-white uppercase mb-4 tracking-tight">Nominate a <br />Strategic Leader</h3>
-             <p className="text-[10px] text-slate-500 mb-10 font-black uppercase tracking-widest leading-relaxed">Join our global faculty of <br />governance and risk architects.</p>
+             <p className="text-[10px] text-slate-500 mb-10 font-black tracking-widest leading-relaxed">Join our global faculty of <br />governance and risk architects.</p>
              <a
                 href={`mailto:info@africagrcsummit.com?subject=${encodeURIComponent("Speaker Nomination: Africa GRC Summit 1.0 (2026)")}&body=${encodeURIComponent("Dear Africa GRC Summit Team,\n\nI would like to nominate a distinguished leader for consideration as a speaker at the Africa GRC Summit 1.0 (2026).\n\nNominee Details:\nFull Name: \nJob Title: \nOrganization: \nLinkedIn Profile: \nArea of Expertise: \n\nBrief Reason for Nomination:\n\n\nNominator Details:\nYour Name: \nYour Email: \nYour Organization: \n\nThank you for considering this nomination.\n\nBest regards,\n")}`}
-                className="px-10 py-4 bg-[var(--brand-gold)]/10 hover:bg-[var(--brand-gold)] border border-[var(--brand-gold)]/40 text-[var(--brand-gold)] hover:text-slate-900 font-black uppercase tracking-[0.2em] text-[10px] transition-all inline-block"
+                className="px-10 py-4 bg-[var(--brand-gold)]/10 hover:bg-[var(--brand-gold)] border border-[var(--brand-gold)]/40 text-[var(--brand-gold)] hover:text-slate-900 font-black tracking-[0.2em] text-[10px] transition-all inline-block"
               >
                 Submit Nomination
              </a>

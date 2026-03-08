@@ -77,7 +77,7 @@ export default function Hero({ initialData }: HeroProps) {
           </StaggerItem>
 
          {/* Subtitle */}
-                <h2 className="text-[var(--brand-gold)] text-base sm:text-lg md:text-2xl font-bold uppercase tracking-[0.12em] md:tracking-widest max-w-[24ch] md:max-w-3xl leading-tight border-l-4 border-[var(--brand-gold)] pl-5 md:pl-6 mt-3 md:mt-4">
+                <h2 className="text-[var(--brand-gold)] text-base sm:text-lg md:text-2xl font-bold tracking-[0.12em] md:tracking-widest max-w-[24ch] md:max-w-3xl leading-tight border-l-4 border-[var(--brand-gold)] pl-5 md:pl-6 mt-3 md:mt-4">
                   {hero.subtitle}
                 </h2>
 
@@ -90,7 +90,7 @@ export default function Hero({ initialData }: HeroProps) {
                   <Calendar className="text-[var(--brand-gold)] w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-white font-black uppercase tracking-[0.08em] md:tracking-[0.12em] text-xs md:text-sm leading-tight">{hero.dates}</span>
+                  <span className="text-white font-black tracking-[0.08em] md:tracking-[0.12em] text-xs md:text-sm leading-tight">{hero.dates}</span>
                 </div>
               </div>
               <div className="hidden md:block w-px bg-white/10" />
@@ -99,7 +99,7 @@ export default function Hero({ initialData }: HeroProps) {
                   <MapPin className="text-[var(--brand-gold)] w-5 h-5 md:w-6 md:h-6" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-white font-black uppercase tracking-[0.08em] md:tracking-[0.12em] text-xs md:text-sm leading-tight">{hero.venue}</span>
+                  <span className="text-white font-black tracking-[0.08em] md:tracking-[0.12em] text-xs md:text-sm leading-tight">{hero.venue}</span>
                 </div>
               </div>
             </div>
@@ -107,7 +107,7 @@ export default function Hero({ initialData }: HeroProps) {
 
           {/* Tagline */}
           <StaggerItem>
-            <p className="mt-14 text-slate-400 text-xs md:text-sm font-bold tracking-[0.32em] uppercase max-w-2xl opacity-70 leading-relaxed">
+            <p className="mt-14 text-slate-400 text-xs md:text-sm font-bold tracking-[0.32em] max-w-2xl opacity-70 leading-relaxed">
                {hero.tagline}
             </p>
           </StaggerItem>
@@ -115,7 +115,7 @@ export default function Hero({ initialData }: HeroProps) {
           <StaggerItem>
             <div className="flex items-center space-x-3 mb-10 px-5 py-2 rounded-sm bg-white/5 border border-white/10 backdrop-blur-md mt-5">
                 <div className="w-1.5 h-1.5 bg-[var(--brand-gold)] rounded-full animate-pulse" />
-                <span className="text-[var(--brand-gold)] text-[9px] font-black uppercase tracking-[0.5em]">
+                <span className="text-[var(--brand-gold)] text-[9px] font-black tracking-[0.5em]">
                   {hero.badge}
                 </span>
             </div>

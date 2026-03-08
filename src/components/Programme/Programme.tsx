@@ -52,7 +52,7 @@ export default function Programme() {
       <section id="programme" className="py-24 bg-[#020617] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-gold/20 border-t-gold rounded-full animate-spin" />
-          <p className="text-gold font-black uppercase tracking-widest text-sm">Loading Agenda...</p>
+          <p className="text-gold font-black tracking-widest text-sm">Loading Agenda...</p>
         </div>
       </section>
     );
@@ -75,7 +75,7 @@ export default function Programme() {
         <FadeIn className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--brand-gold)]/10 border border-[var(--brand-gold)]/20 mb-6">
             <Shield className="w-4 h-4 text-[var(--brand-gold)]" />
-            <span className="text-[var(--brand-gold)] text-xs font-bold tracking-[0.2em] uppercase">Executive Curriculum</span>
+            <span className="text-[var(--brand-gold)] text-xs font-bold tracking-[0.2em]">Executive Curriculum</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black mb-6 text-slate-900 tracking-tight">
             Summit <span className="text-[var(--brand-gold)]">Programme</span>
@@ -98,10 +98,10 @@ export default function Programme() {
                 }`}
               >
                 <div className="relative z-10 flex flex-col items-center">
-                  <span className={`text-[10px] font-black tracking-[0.3em] uppercase mb-1 ${activeDayIdx === idx ? "text-[var(--brand-gold)]" : "text-slate-300"}`}>
+                  <span className={`text-[10px] font-black tracking-[0.3em] mb-1 ${activeDayIdx === idx ? "text-[var(--brand-gold)]" : "text-slate-300"}`}>
                     Day {day.day}
                   </span>
-                  <span className="text-xl font-black tracking-tight uppercase">
+                  <span className="text-xl font-black tracking-tight">
                     {day.date}
                   </span>
                 </div>
@@ -118,7 +118,7 @@ export default function Programme() {
 
         {/* Current Day Theme Header */}
         <FadeIn className="mb-12 text-center" key={activeDayIdx}>
-          <p className="text-[var(--brand-gold)] font-bold tracking-widest text-sm uppercase mb-2">Subject Context</p>
+          <p className="text-[var(--brand-gold)] font-bold tracking-widest text-sm mb-2">Subject Context</p>
           <h3 className="text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-wider">{currentDay.theme}</h3>
           <div className="w-24 h-1 bg-[var(--brand-gold)] mx-auto mt-6" />
         </FadeIn>
@@ -138,7 +138,7 @@ export default function Programme() {
               <div className="w-full md:w-56 p-6 flex-shrink-0 border-b md:border-b-0 md:border-r border-slate-100 flex flex-col justify-center gap-2">
                 <div className="flex items-center gap-2 text-slate-400">
                   <Clock size={16} />
-                  <span className="text-[10px] font-black tracking-widest uppercase">Time Slot</span>
+                  <span className="text-[10px] font-black tracking-widest">Time Slot</span>
                 </div>
                 <div className="text-xl md:text-2xl font-black text-slate-900 tracking-tighter">
                   {session.time}
@@ -149,7 +149,7 @@ export default function Programme() {
               <div className="flex-1 p-6 md:p-8">
                 <div className="flex flex-wrap items-center gap-3 mb-3">
                   {session.type && (
-                    <span className={`px-2 py-0.5 text-[10px] font-black uppercase tracking-widest border border-current rounded-sm ${
+                    <span className={`px-2 py-0.5 text-[10px] font-black tracking-widest border border-current rounded-sm ${
                       ['keynote', 'plenary'].includes(session.type) ? 'text-[var(--brand-gold)]' : 
                       session.type === 'forum' ? 'text-blue-600' :
                       ['case-study', 'workshop'].includes(session.type) ? 'text-emerald-600' :
@@ -159,7 +159,7 @@ export default function Programme() {
                     </span>
                   )}
                   {session.role && (
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{session.role}</span>
+                    <span className="text-[10px] font-black text-slate-400 tracking-widest">{session.role}</span>
                   )}
                 </div>
 
@@ -179,8 +179,8 @@ export default function Programme() {
                       <Users size={14} className="text-[var(--brand-gold)]" />
                     </div>
                     <div>
-                      <p className="text-[8px] text-slate-400 font-bold uppercase tracking-widest">Presenter</p>
-                      <p className="text-slate-900 font-black text-sm uppercase">{session.speaker}</p>
+                      <p className="text-[8px] text-slate-400 font-bold tracking-widest">Presenter</p>
+                      <p className="text-slate-900 font-black text-sm">{session.speaker}</p>
                     </div>
                   </div>
                 )}
@@ -196,7 +196,7 @@ export default function Programme() {
                   <div className="mt-6 pt-6 border-t border-slate-100">
                     <div className="flex items-center gap-2 mb-4">
                       <Target className="w-4 h-4 text-[var(--brand-gold)]" />
-                      <p className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Core Insights Matrix</p>
+                      <p className="text-[10px] font-black text-slate-900 tracking-widest">Core Insights Matrix</p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {session.keyFocus.map((focus, fIdx) => (
@@ -214,7 +214,7 @@ export default function Programme() {
                   <div className="mt-6 pt-6 border-t border-slate-100">
                     <div className="flex items-center gap-2 mb-4">
                       <Zap className="w-4 h-4 text-emerald-600" />
-                      <p className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Case Implementation Pillars</p>
+                      <p className="text-[10px] font-black text-slate-900 tracking-widest">Case Implementation Pillars</p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {session.caseCoverage.map((item, cIdx) => (
@@ -238,7 +238,7 @@ export default function Programme() {
 
         {/* Final CTA in Programme */}
         <div className="mt-20 text-center">
-            <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest italic mb-4">Curriculum and speakers subject to strategic refinement.</p>
+            <p className="text-slate-400 text-[10px] font-black tracking-widest italic mb-4">Curriculum and speakers subject to strategic refinement.</p>
             <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-slate-100 to-transparent" />
         </div>
       </div>

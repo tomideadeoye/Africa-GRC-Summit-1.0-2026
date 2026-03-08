@@ -64,7 +64,7 @@ export default function Partners() {
                       />
                     )}
                     <span 
-                      className="text-slate-900 font-black text-lg tracking-tight group-hover:text-[var(--brand-gold)] transition-colors text-center uppercase"
+                      className="text-slate-900 font-black text-lg tracking-tight group-hover:text-[var(--brand-gold)] transition-colors text-center"
                     >
                       {sponsor.name}
                     </span>
@@ -82,17 +82,17 @@ export default function Partners() {
         <div className="mt-12 text-center">
           <div className="inline-flex items-center gap-3 px-8 py-4 bg-slate-50 border border-dashed border-slate-200 rounded-sm">
             <div className="w-2 h-2 rounded-full bg-[var(--brand-gold)] animate-pulse" />
-            <span className="text-slate-400 text-[10px] font-black uppercase tracking-widest">
+            <span className="text-slate-400 text-[10px] font-black tracking-widest">
               Additional sponsors to be announced
             </span>
           </div>
         </div>
 
         <div className="mt-16 text-center">
-          <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-6 italic">Interested in becoming a partner?</p>
+          <p className="text-slate-400 text-[10px] font-black tracking-widest mb-6 italic">Interested in becoming a partner?</p>
           <a 
             href={`mailto:info@africagrcsummit.com?subject=${encodeURIComponent("Sponsorship Inquiry: Africa GRC Summit 1.0 (2026)")}&body=${encodeURIComponent("Dear Africa GRC Summit Team,\n\nI am writing to express my organization's interest in partnering with the upcoming Africa GRC Summit 1.0 (2026).\n\nWe would like to request more information regarding your sponsorship packages and opportunities for institutional representation at the executive forum.\n\nOrganization Name: \nContact Person: \nJob Title: \nPhone Number: \n\nPlease let us know how we can proceed.\n\nBest regards,\n")}`}
-            className="inline-flex items-center justify-center px-10 py-4 text-[10px] font-black text-white bg-[var(--brand-navy)] rounded-sm hover:bg-[var(--brand-gold)] shadow-md hover:shadow-xl transition-all uppercase tracking-[0.2em]"
+            className="inline-flex items-center justify-center px-10 py-4 text-[10px] font-black text-white bg-[var(--brand-navy)] rounded-sm hover:bg-[var(--brand-gold)] shadow-md hover:shadow-xl transition-all tracking-[0.2em]"
           >
             Become a Sponsor
           </a>

@@ -131,7 +131,6 @@
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   box-shadow: 0 4px 20px rgba(255, 208, 126, 0.3);
-  text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 

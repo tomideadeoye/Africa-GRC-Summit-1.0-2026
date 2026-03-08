@@ -56,7 +56,7 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
             {/* Badge */}
             <div className="flex items-center gap-2 mb-6">
               <ShieldCheck size={16} className="text-[var(--brand-gold)]" />
-              <span className="text-[10px] font-black text-[var(--brand-gold)] uppercase tracking-[0.3em]">
+              <span className="text-[10px] font-black text-[var(--brand-gold)] tracking-[0.3em]">
                 Global Faculty
               </span>
             </div>
@@ -68,10 +68,10 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
 
             {/* Title & Company */}
             <div className="mb-8">
-              <p className="text-lg font-black text-[var(--brand-gold)] uppercase tracking-tight mb-1">
+              <p className="text-lg font-black text-[var(--brand-gold)] tracking-tight mb-1">
                 {speaker.title}
               </p>
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-wider">
+              <p className="text-sm font-bold text-slate-400 tracking-wider">
                 {speaker.company}
               </p>
             </div>
@@ -79,7 +79,7 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
             {/* Bio */}
             {speaker.bio && (
               <div className="mb-8">
-                <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">
+                <h3 className="text-[10px] font-black text-slate-500 tracking-[0.2em] mb-4">
                   Biography
                 </h3>
                 <p className="text-slate-300 leading-relaxed font-medium">
@@ -98,7 +98,7 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
                   className="flex items-center gap-3 text-slate-400 hover:text-[var(--brand-gold)] transition-colors group"
                 >
                   <Linkedin size={20} />
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] group-hover:text-[var(--brand-gold)]">
+                  <span className="text-[10px] font-black tracking-[0.2em] group-hover:text-[var(--brand-gold)]">
                     Connect on LinkedIn
                   </span>
                 </a>
@@ -144,7 +144,7 @@ export default function CredibilityStrip() {
 
           {/* Convener Group */}
           <div className="flex flex-col border-l border-white/10 pl-6 md:pl-8">
-            <span className="text-[10px] uppercase tracking-[40%] font-black mb-3 text-slate-500">
+            <span className="text-[10px] tracking-[40%] font-black mb-3 text-slate-500">
               Convened by
             </span>
             <h4 className="text-base font-black tracking-tight uppercase text-white">
@@ -154,7 +154,7 @@ export default function CredibilityStrip() {
 
           {/* Founder Group - Clickable to open modal */}
           <div className="flex flex-col border-l border-white/10 pl-6 md:pl-8">
-            <span className="text-[10px] uppercase tracking-[40%] font-black mb-3 text-[var(--brand-gold)]">
+            <span className="text-[10px] tracking-[40%] font-black mb-3 text-[var(--brand-gold)]">
               Founder & Summit Convener
             </span>
             <div className="flex items-center">
@@ -172,7 +172,7 @@ export default function CredibilityStrip() {
 
           {/* Platinum Sponsor Group */}
           <div className="flex flex-col border-l border-white/10 pl-6 md:pl-8">
-            <span className="text-[10px] uppercase tracking-[40%] font-black mb-3 text-[var(--brand-gold)]">
+            <span className="text-[10px] tracking-[40%] font-black mb-3 text-[var(--brand-gold)]">
               Platinum Sponsor
             </span>
             <h4 className="text-lg font-black tracking-tight uppercase text-white">
@@ -182,7 +182,7 @@ export default function CredibilityStrip() {
 
           {/* Keynote Group - Clickable to open modal */}
           <div className="flex flex-col border-l border-white/10 pl-6 md:pl-8">
-            <span className="text-[10px] uppercase tracking-[40%] font-black mb-3 text-[var(--brand-gold)]">
+            <span className="text-[10px] tracking-[40%] font-black mb-3 text-[var(--brand-gold)]">
               Global Keynote
             </span>
             <div className="flex flex-col">

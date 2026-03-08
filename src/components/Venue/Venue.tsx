@@ -50,7 +50,7 @@ export default function Venue() {
 
       <div className="container px-6 mx-auto relative z-10">
         <FadeIn className="text-center mb-16">
-            <span className="text-[var(--brand-gold)] font-black tracking-[0.3em] text-[10px] uppercase mb-2 block">#AfricaGRCSummit2026</span>
+            <span className="text-[var(--brand-gold)] font-black tracking-[0.3em] text-[10px] mb-2 block">#AfricaGRCSummit2026</span>
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight uppercase tracking-tighter">
                 Directions to the summit venue
             </h2>
@@ -71,22 +71,22 @@ export default function Venue() {
  
             <div className="relative z-20 space-y-12">
                 <div className="space-y-4">
-                    <h3 className="text-[10px] font-black text-[var(--brand-gold)] uppercase tracking-[0.3em]">Location</h3>
-                    <p className="text-white text-xl font-black uppercase tracking-tighter leading-tight">
+                    <h3 className="text-[10px] font-black text-[var(--brand-gold)] tracking-[0.3em]">Location</h3>
+                    <p className="text-white text-xl font-black tracking-tighter leading-tight">
                         {venue.name}, <br />
                         {venue.address}
                     </p>
                 </div>
  
                 <div className="space-y-4">
-                    <h3 className="text-[10px] font-black text-[var(--brand-gold)] uppercase tracking-[0.3em]">Direct Access</h3>
+                    <h3 className="text-[10px] font-black text-[var(--brand-gold)] tracking-[0.3em]">Direct Access</h3>
                     <div className="flex items-center space-x-2">
                         <MapPin className="text-[var(--brand-gold)]" size={14} />
                         <a 
                           href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue.name + ' ' + venue.address)}`} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-white/90 font-black text-sm hover:text-[var(--brand-gold)] transition-colors flex items-center group uppercase tracking-widest"
+                          className="text-white/90 font-black text-sm hover:text-[var(--brand-gold)] transition-colors flex items-center group tracking-widest"
                         >
                             Get Directions
                             <Navigation className="ml-2 h-3 w-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
