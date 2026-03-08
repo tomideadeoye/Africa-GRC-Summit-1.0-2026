@@ -21,17 +21,17 @@ interface SpeakerModalProps {
 
 function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-start md:items-center justify-center p-0 md:p-6 bg-black/95 backdrop-blur-sm overflow-y-auto" onClick={onClose}>
       <div 
-        className="relative w-full max-w-4xl bg-[var(--brand-navy)] border border-white/10 rounded-sm overflow-hidden shadow-2xl"
+        className="relative w-full max-w-4xl bg-[var(--brand-navy)] md:border md:border-white/10 md:rounded-sm shadow-2xl min-h-screen md:min-h-0 my-0 md:my-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
+        {/* Close Button - Fixed on mobile to stay visible during scroll */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-10 p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"
+          className="fixed md:absolute top-4 right-4 z-[60] p-3 md:p-2 bg-black/60 md:bg-white/5 hover:bg-[var(--brand-gold)] hover:text-navy rounded-full transition-all duration-300 border border-white/20"
         >
-          <X size={24} className="text-white" />
+          <X size={24} className="text-white group-hover:text-navy" />
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
