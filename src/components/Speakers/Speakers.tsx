@@ -52,7 +52,7 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
           </div>
 
           {/* Right: Content */}
-          <div className="p-12 flex flex-col justify-center">
+          <div className="p-8 md:p-12 flex flex-col justify-center">
             {/* Badge */}
             <div className="flex items-center gap-2 mb-6">
               <ShieldCheck size={16} className="text-[var(--brand-gold)]" />
@@ -62,7 +62,7 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
             </div>
 
             {/* Name */}
-            <h2 className="text-4xl font-black text-white uppercase tracking-tighter mb-4">
+            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tighter mb-4">
               {speaker.name}
             </h2>
 
@@ -71,9 +71,11 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
               <p className="text-lg font-black text-[var(--brand-gold)] tracking-tight mb-1">
                 {speaker.title}
               </p>
-              <p className="text-sm font-bold text-slate-400 tracking-wider">
-                {speaker.company}
-              </p>
+              {speaker.company && speaker.company !== speaker.title && (
+                <p className="text-sm font-bold text-slate-400 tracking-wider">
+                  {speaker.company}
+                </p>
+              )}
             </div>
 
             {/* Bio */}
