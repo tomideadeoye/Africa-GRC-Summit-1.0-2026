@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { X, User, ShieldCheck, Linkedin } from "lucide-react";
 import { FadeIn } from "../ui/FadeIn";
 
@@ -20,21 +22,50 @@ interface SpeakerModalProps {
 }
 
 function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-black/90 backdrop-blur-sm" onClick={onClose}>
-      {/* Close Button - Outside the modal box so it's always accessible */}
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 md:top-6 md:right-6 z-[110] p-3 md:p-2 bg-white/10 hover:bg-[var(--brand-gold)] hover:text-navy rounded-full transition-all duration-300 border border-white/20 shadow-xl"
-      >
-        <X size={24} className="text-white" />
-      </button>
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => {
+    setMounted(true);
+    // Prevent scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  if (!mounted) return null;
+
+  const modalContent = (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 md:p-6 bg-black/95 backdrop-blur-md" 
+      onClick={onClose}
+    >
       {/* Modal Box */}
-      <div 
-        className="relative w-full max-w-4xl max-h-[85vh] bg-[var(--brand-navy)] border border-white/10 rounded-xl overflow-y-auto shadow-2xl flex flex-col md:block"
+      <motion.div 
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        transition={{ 
+          type: "spring", 
+          damping: 25, 
+          stiffness: 300,
+          delay: 0.1
+        }}
+        className="relative w-full max-w-4xl max-h-[92vh] bg-[var(--brand-navy)] border border-white/10 rounded-xl overflow-y-auto shadow-2xl flex flex-col md:block"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Stylistic Close Button - Gilded Obsidian Style */}
+        <button
+          onClick={onClose}
+          aria-label="Close speaker profile"
+          className="absolute top-6 right-6 z-[100] p-3 bg-[var(--brand-navy)]/90 text-white hover:bg-[var(--brand-gold)] hover:text-slate-950 rounded-full transition-all duration-500 border border-[var(--brand-gold)]/20 hover:border-[var(--brand-gold)] shadow-2xl backdrop-blur-xl group"
+        >
+          <X size={24} className="group-hover:rotate-90 transition-transform duration-500" />
+        </button>
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left: Image Container - Fixed height on mobile to prevent content push */}
           <div className="relative h-[45vh] md:h-auto md:aspect-auto shrink-0">
@@ -42,7 +73,7 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
               <img
                 src={speaker.image}
                 alt={speaker.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-slate-950">
@@ -110,9 +141,11 @@ function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
+
+  return createPortal(modalContent, document.body);
 }
 
 export default function CredibilityStrip() {
@@ -139,7 +172,8 @@ export default function CredibilityStrip() {
   const michael = speakers.find(s => s.name.toLowerCase().includes('rasmussen'));
 
   return (
-    <section className="py-12 bg-[var(--brand-navy)] border-t border-white/5 relative overflow-hidden">
+    <>
+      <section className="py-12 bg-[var(--brand-navy)] border-t border-white/5 relative overflow-hidden">
       {/* Subtle geometric element */}
       <div className="absolute top-0 left-0 w-1 h-full bg-[#d4af37]"></div>
 
@@ -202,13 +236,16 @@ export default function CredibilityStrip() {
         </div>
       </FadeIn>
 
-      {/* Speaker Profile Modal */}
+    </section>
+    
+    <AnimatePresence>
       {selectedSpeaker && (
         <SpeakerModal
           speaker={selectedSpeaker}
           onClose={() => setSelectedSpeaker(null)}
         />
       )}
-    </section>
+    </AnimatePresence>
+    </>
   );
 }
