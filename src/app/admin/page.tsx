@@ -81,9 +81,9 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 { title: 'Manage Agenda', desc: 'Update sessions and curriculum', href: '/admin/agenda' },
-                { title: 'Hero Restoration', desc: 'Edit title and event details', href: '/admin/hero' },
+                { title: 'Main Section', desc: 'Edit title and event details', href: '/admin/hero' },
                 { title: 'Speaker Gallery', desc: 'Manage bios and keynote list', href: '/admin/speakers' },
-                { title: 'Venue Protocol', desc: 'Update location and directions', href: '/admin/venue' },
+                { title: 'Venue Details', desc: 'Update location and directions', href: '/admin/venue' },
               ].map((item, i) => (
                 <Link 
                   key={i} 
@@ -101,12 +101,12 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* System Intelligence */}
+        {/* System Information */}
         <div className="space-y-6">
            <div className="bg-[#d4af37]/10 border border-[#d4af37]/20 p-8 rounded-sm">
              <div className="flex items-center gap-3 mb-6">
                 <AlertCircle className="text-[#d4af37] h-6 w-6" />
-                <h2 className="text-lg font-black text-[#d4af37] uppercase tracking-tight">Summit</h2>
+                <h2 className="text-lg font-black text-[#d4af37] uppercase tracking-tight">System Status</h2>
              </div>
           
              <div className="space-y-3">

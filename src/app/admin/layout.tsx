@@ -28,6 +28,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // Skip admin layout for the login page
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
+
   return (
     <div className="flex h-screen overflow-hidden bg-slate-50 dark:bg-slate-900">
       {/* Mobile sidebar backdrop */}
@@ -83,15 +88,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             })}
           </nav>
 
-          {/* Back to site */}
-          <div className="p-4 border-t border-slate-800">
+          {/* Back to site & Logout */}
+          <div className="p-4 border-t border-slate-800 space-y-2">
             <Link
               href="/"
               className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"
             >
-              <LogOut className="mr-3 h-5 w-5" />
-              Back to Site
+              <LayoutDashboard className="mr-3 h-5 w-5" />
+              Public View
             </Link>
+            <button
+              onClick={async () => {
+                await fetch('/api/admin/logout', { method: 'POST' });
+                window.location.href = '/admin/login';
+              }}
+              className="w-full flex items-center px-3 py-3 rounded-lg text-sm font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors"
+            >
+              <LogOut className="mr-3 h-5 w-5" />
+              Sign Out
+            </button>
           </div>
         </div>
       </aside>

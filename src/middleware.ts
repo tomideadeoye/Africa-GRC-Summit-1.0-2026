@@ -32,16 +32,17 @@ function unauthorizedResponse(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  return new NextResponse('Authentication required', {
-    status: 401,
-    headers: {
-      'WWW-Authenticate': 'Basic realm="Admin Area"',
-    },
-  });
+  const url = new URL('/admin/login', request.url);
+  return NextResponse.redirect(url);
 }
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Allow the login page and its resources (including login API)
+  if (pathname === '/admin/login' || pathname.startsWith('/admin/login/') || pathname === '/api/admin/login') {
+    return NextResponse.next();
+  }
 
   const isAdminPage = pathname.startsWith('/admin');
   const isAdminApi = pathname.startsWith('/api/admin');
@@ -50,11 +51,16 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Allow GET on config for public consumption
   if (isAdminApi && pathname === '/api/admin/config' && request.method === 'GET') {
     return NextResponse.next();
   }
 
-  if (!isAuthorized(request)) {
+  // Check for the admin session cookie OR Basic Auth
+  const adminCookie = request.cookies.get('admin-session');
+  const isCookieAuthorized = adminCookie?.value === process.env.ADMIN_PASSWORD;
+
+  if (!isCookieAuthorized && !isAuthorized(request)) {
     return unauthorizedResponse(request);
   }
 
